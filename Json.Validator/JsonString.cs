@@ -11,17 +11,14 @@ namespace Json
                 return false;
             }
 
-            return Quoted(input) &&
+            return IsQuoted(input) &&
                    AlwaysStartsWithQuotes(input) &&
-                   AlwaysEndsWithQuotes(input) &&
-                   IsEmptyDoubleQuoted(input);
+                   ContainsControlCharacters(input);
         }
 
-        static bool Quoted(string input)
+        static bool IsQuoted(string input)
         {
-            return input.StartsWith('"') && input.EndsWith('"') &&
-                AlwaysStartsWithQuotes(input) &&
-                AlwaysEndsWithQuotes(input);
+            return input.StartsWith('"') && input.EndsWith('"');
         }
 
         static bool AlwaysStartsWithQuotes(string input)
@@ -36,17 +33,12 @@ namespace Json
                 }
             }
 
-            return quotesCounter % numberTwo == 0 && Quoted(input);
+            return quotesCounter % numberTwo == 0 && IsQuoted(input);
         }
 
-        static bool AlwaysEndsWithQuotes(string input)
+        static bool ContainsControlCharacters(string input)
         {
-            return AlwaysStartsWithQuotes(input);
-        }
-
-        static bool IsEmptyDoubleQuoted(string input)
-        {
-            return Quoted(input);
+            return input.Contains('\\');
         }
     }
 }

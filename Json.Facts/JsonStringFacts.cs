@@ -35,7 +35,7 @@ namespace Json.Facts
             Assert.False(IsJsonString(string.Empty));
         }
 
-        [Fact(Skip = "Remove this Skip as you implement")]
+        [Fact]
         public void IsAnEmptyDoubleQuotedString()
         {
             Assert.True(IsJsonString(Quoted(string.Empty)));
@@ -48,7 +48,7 @@ namespace Json.Facts
         }
 
 
-        [Fact(Skip = "Remove this Skip as you implement")]
+        [Fact]
         public void DoesNotContainControlCharacters()
         {
             Assert.False(IsJsonString(Quoted("a\nb\rc")));
