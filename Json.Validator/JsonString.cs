@@ -13,12 +13,15 @@ namespace Json
 
             return Quoted(input) &&
                    AlwaysStartsWithQuotes(input) &&
-                   AlwaysEndsWithQuotes(input);
+                   AlwaysEndsWithQuotes(input) &&
+                   IsEmptyDoubleQuoted(input);
         }
 
         static bool Quoted(string input)
         {
-            return input.StartsWith('"') && input.EndsWith('"');
+            return input.StartsWith('"') && input.EndsWith('"') &&
+                AlwaysStartsWithQuotes(input) &&
+                AlwaysEndsWithQuotes(input);
         }
 
         static bool AlwaysStartsWithQuotes(string input)
@@ -43,8 +46,7 @@ namespace Json
 
         static bool IsEmptyDoubleQuoted(string input)
         {
-            const int numberTwo = 2;
-            return Quoted(input) && input.Length > numberTwo;
+            return Quoted(input);
         }
     }
 }
