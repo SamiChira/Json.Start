@@ -40,5 +40,11 @@ namespace Json
         {
             return AlwaysStartsWithQuotes(input);
         }
+
+        static bool IsEmptyDoubleQuoted(string input)
+        {
+            const int numberTwo = 2;
+            return Quoted(input) && input.Length > numberTwo;
+        }
     }
 }
