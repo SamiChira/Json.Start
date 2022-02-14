@@ -6,8 +6,14 @@ namespace Json
     {
         public static bool IsJsonString(string input)
         {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
             return Quoted(input) &&
-                AlwaysStartsWithQuotes(input);
+                   AlwaysStartsWithQuotes(input) &&
+                   AlwaysEndsWithQuotes(input);
         }
 
         static bool Quoted(string input)
@@ -28,6 +34,11 @@ namespace Json
             }
 
             return quotesCounter % numberTwo == 0 && Quoted(input);
+        }
+
+        static bool AlwaysEndsWithQuotes(string input)
+        {
+            return AlwaysStartsWithQuotes(input);
         }
     }
 }
