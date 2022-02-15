@@ -11,13 +11,15 @@ namespace Json
                 return false;
             }
 
-            return Quoted(input) &&
-                   IsEmptyDoubleQuoted(input);
+            return IsQuoted(input) &&
+                   IsEmptyDoubleQuoted(input) &&
+                   !ContainsControlCharacters(input);
         }
 
-        static bool Quoted(string input)
+        static bool IsQuoted(string input)
         {
-            return input.StartsWith('"') && input.EndsWith('"') &&
+            return input.StartsWith("\"") &&
+                   input.EndsWith("\"") &&
                    AlwaysStartsWithQuotes(input);
         }
 
@@ -33,12 +35,27 @@ namespace Json
                 }
             }
 
-            return quotesCounter % numberTwo == 0 && Quoted(input);
+            return quotesCounter % numberTwo == 0;
         }
 
         static bool IsEmptyDoubleQuoted(string input)
         {
-            return Quoted(input);
+            return IsQuoted(input);
+        }
+
+        static bool ContainsControlCharacters(string input)
+        {
+            char[] controlChars = { '\b', '\t', '\r', '\n', '\f', '\\', '/' };
+
+            foreach (var escapeChar in controlChars)
+            {
+                if (input.Contains(escapeChar))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
