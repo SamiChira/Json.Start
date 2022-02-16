@@ -77,8 +77,9 @@ namespace Json
         static bool ValidUnicode(string input)
         {
             const int UnicodeCharsAfterU = 4;
-            string removedQuotes = input.Trim('"');
-            return removedQuotes.Length - removedQuotes.LastIndexOf("u") - 1 >= UnicodeCharsAfterU;
+            return input.Contains('u') ?
+                   input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU :
+                   IsQuoted(input);
         }
     }
 }
