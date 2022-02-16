@@ -12,7 +12,6 @@ namespace Json
             }
 
             return IsQuoted(input) &&
-                   IsEmptyDoubleQuoted(input) &&
                    !ContainsControlCharacters(input);
         }
 
@@ -38,14 +37,24 @@ namespace Json
             return quotesCounter % numberTwo == 0;
         }
 
-        static bool IsEmptyDoubleQuoted(string input)
-        {
-            return IsQuoted(input);
-        }
-
         static bool ContainsControlCharacters(string input)
         {
-            char[] controlChars = { '\b', '\t', '\r', '\n', '\f', '/' };
+            char[] controlChars = { '\b', '\t', '\r', '\n', '\f', '\\', '/' };
+
+            foreach (var escapeChar in controlChars)
+            {
+                if (input.Contains(escapeChar))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        static bool ContainsEscapedControlCharacters(string input)
+        {
+            string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"" };
 
             foreach (var escapeChar in controlChars)
             {
