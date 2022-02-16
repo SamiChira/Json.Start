@@ -12,7 +12,8 @@ namespace Json
             }
 
             return IsQuoted(input) &&
-                   ContainsEscapedControlCharacters(input);
+                   ContainsEscapedControlCharacters(input) &&
+                   EndsWithReverseSolidus(input);
         }
 
         static bool IsQuoted(string input)
@@ -65,6 +66,11 @@ namespace Json
             }
 
             return !ContainsControlCharacters(input);
+        }
+
+        static bool EndsWithReverseSolidus(string input)
+        {
+            return !input.Trim('"').EndsWith('\\');
         }
     }
 }
