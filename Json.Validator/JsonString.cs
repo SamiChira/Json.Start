@@ -13,7 +13,8 @@ namespace Json
 
             return IsQuoted(input) &&
                    ContainsEscapedControlCharacters(input) &&
-                   EndsWithReverseSolidus(input);
+                   EndsWithReverseSolidus(input) &&
+                   ValidUnicode(input);
         }
 
         static bool IsQuoted(string input)
@@ -71,6 +72,13 @@ namespace Json
         static bool EndsWithReverseSolidus(string input)
         {
             return !input.Trim('"').EndsWith('\\');
+        }
+
+        static bool ValidUnicode(string input)
+        {
+            const int UnicodeCharsAfterU = 4;
+            string removedQuotes = input.Trim('"');
+            return removedQuotes.Length - removedQuotes.LastIndexOf("u") - 1 >= UnicodeCharsAfterU;
         }
     }
 }
