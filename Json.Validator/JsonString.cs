@@ -12,7 +12,7 @@ namespace Json
             }
 
             return IsQuoted(input) &&
-                   !ContainsControlCharacters(input);
+                   ContainsEscapedControlCharacters(input);
         }
 
         static bool IsQuoted(string input)
@@ -64,7 +64,7 @@ namespace Json
                 }
             }
 
-            return false;
+            return !ContainsControlCharacters(input);
         }
     }
 }
