@@ -20,23 +20,7 @@ namespace Json
         static bool IsQuoted(string input)
         {
             return input.StartsWith("\"") &&
-                   input.EndsWith("\"") &&
-                   AlwaysStartsWithQuotes(input);
-        }
-
-        static bool AlwaysStartsWithQuotes(string input)
-        {
-            const int numberTwo = 2;
-            int quotesCounter = 0;
-            foreach (var item in input)
-            {
-                if (item == '"')
-                {
-                    quotesCounter++;
-                }
-            }
-
-            return quotesCounter % numberTwo == 0;
+                   input.EndsWith("\"");
         }
 
         static bool ContainsControlCharacters(string input)
