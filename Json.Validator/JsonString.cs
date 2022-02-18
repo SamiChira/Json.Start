@@ -27,17 +27,15 @@ namespace Json
 
         static bool ContainsControlCharacters(string input)
         {
-            char[] controlChars = { '\b', '\t', '\r', '\n', '\f', '\\', '/' };
-
-            foreach (var escapeChar in controlChars)
+            foreach (var item in input)
             {
-                if (input.Contains(escapeChar))
+                if (item < ' ')
                 {
-                    return true;
+                    return false;
                 }
             }
 
-            return false;
+            return true;
         }
 
         static bool ContainsEscapedControlCharacters(string input)
@@ -52,7 +50,7 @@ namespace Json
                 }
             }
 
-            return !ContainsControlCharacters(input);
+            return ContainsControlCharacters(input);
         }
 
         static bool EndsWithReverseSolidus(string input)
