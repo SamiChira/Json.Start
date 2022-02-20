@@ -12,7 +12,7 @@ namespace Json
             }
 
             return IsQuoted(input) &&
-                   ContainsControlCharacters(input) &&
+                   ContainsValidEscapedControlCharacters(input) &&
                    EndsWithReverseSolidus(input) &&
                    ValidUnicode(input);
         }
@@ -31,11 +31,26 @@ namespace Json
             {
                 if (item < ' ')
                 {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        static bool ContainsValidEscapedControlCharacters(string input)
+        {
+            string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"", "\\u" };
+
+            foreach (var escapeChar in controlChars)
+            {
+                if (input.Contains(escapeChar))
+                {
                     return true;
                 }
             }
 
-            return false;
+            return ContainsControlCharacters(input);
         }
 
         static bool EndsWithReverseSolidus(string input)
