@@ -12,7 +12,7 @@ namespace Json
             }
 
             return IsQuoted(input) &&
-                   ContainsValidEscapedControlCharacters(input) &&
+                   ContainsValidControlCharacters(input) &&
                    EndsWithReverseSolidus(input) &&
                    ValidUnicode(input);
         }
@@ -42,7 +42,7 @@ namespace Json
             return false;
         }
 
-        static bool ContainsValidEscapedControlCharacters(string input)
+        static bool ContainsValidControlCharacters(string input)
         {
             string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"", "\\u" };
 
