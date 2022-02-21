@@ -18,22 +18,18 @@ namespace Json
         static bool IsQuoted(string input)
         {
             const int NumberTwo = 2;
-            return input.StartsWith("\"") &&
-                   input.EndsWith("\"") &&
+            return input.StartsWith('"') &&
+                   input.EndsWith('"') &&
                    input.Length >= NumberTwo;
         }
 
         static bool ContainsControlCharacters(string input)
         {
-            char[] controlChars = { '\b', '\t', '\r', '\n', '\f', '\\', '\"' };
             foreach (var item in input)
             {
-                foreach (var escapeChar in controlChars)
+                if (item < ' ')
                 {
-                    if (item < ' ' || (item == '\\' && input[input.IndexOf(item) + 1] == escapeChar))
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
