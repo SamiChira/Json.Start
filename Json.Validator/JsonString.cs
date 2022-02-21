@@ -39,7 +39,7 @@ namespace Json
                 }
             }
 
-            return false;
+            return input.Contains("\\");
         }
 
         static bool ContainsValidControlCharacters(string input)
