@@ -11,7 +11,8 @@ namespace Json
                 return false;
             }
 
-            return ContainsValidControlCharacters(input) &&
+            return IsQuoted(input) &&
+                   ContainsValidControlCharacters(input) &&
                    ValidUnicode(input);
         }
 
