@@ -11,9 +11,13 @@ namespace Json
                 return false;
             }
 
-            return IsQuoted(input) &&
-                   ContainsValidControlCharacters(input) &&
-                   ValidUnicode(input);
+            return ContainsValidControlCharacters(input) &&
+                   HasValidContent(input);
+        }
+
+        static bool HasValidContent(string input)
+        {
+            return input.Contains("\\u") ? ValidUnicode(input) : IsQuoted(input);
         }
 
         static bool IsQuoted(string input)
@@ -64,9 +68,7 @@ namespace Json
                 }
             }
 
-            return input.Contains("\\u") ?
-                   input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU :
-                   IsQuoted(input);
+            return input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU;
         }
     }
 }
