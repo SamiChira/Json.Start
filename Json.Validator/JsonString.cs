@@ -13,7 +13,6 @@ namespace Json
 
             return IsQuoted(input) &&
                    ContainsValidControlCharacters(input) &&
-                   EndsWithReverseSolidus(input) &&
                    ValidUnicode(input);
         }
 
@@ -55,11 +54,6 @@ namespace Json
             }
 
             return !ContainsControlCharacters(input);
-        }
-
-        static bool EndsWithReverseSolidus(string input)
-        {
-            return !input.Trim('"').EndsWith('\\');
         }
 
         static bool ValidUnicode(string input)
