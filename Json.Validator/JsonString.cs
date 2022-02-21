@@ -12,7 +12,7 @@ namespace Json
             }
 
             return IsQuoted(input) &&
-                   ContainsEscapedControlCharacters(input) &&
+                   ContainsValidEscapedControlCharacters(input) &&
                    EndsWithReverseSolidus(input) &&
                    ValidUnicode(input);
         }
@@ -27,18 +27,22 @@ namespace Json
 
         static bool ContainsControlCharacters(string input)
         {
+            char[] controlChars = { '\b', '\t', '\r', '\n', '\f', '\\', '\"' };
             foreach (var item in input)
             {
-                if (item < ' ')
+                foreach (var escapeChar in controlChars)
                 {
-                    return true;
+                    if (item < ' ' || (item == '\\' && input[input.IndexOf(item) + 1] == escapeChar))
+                    {
+                        return true;
+                    }
                 }
             }
 
             return false;
         }
 
-        static bool ContainsEscapedControlCharacters(string input)
+        static bool ContainsValidEscapedControlCharacters(string input)
         {
             string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"", "\\u" };
 
