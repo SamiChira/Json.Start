@@ -65,7 +65,7 @@ namespace Json
         static bool ValidUnicode(string input)
         {
             const int UnicodeCharsAfterU = 4;
-            return input.Contains('u') ?
+            return input.Contains("\\u") ?
                    input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU :
                    IsQuoted(input);
         }
