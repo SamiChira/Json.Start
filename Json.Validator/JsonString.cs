@@ -11,8 +11,7 @@ namespace Json
                 return false;
             }
 
-            return IsQuoted(input) &&
-                   ContainsValidControlCharacters(input) &&
+            return ContainsValidControlCharacters(input) &&
                    ValidUnicode(input);
         }
 
@@ -59,6 +58,15 @@ namespace Json
         static bool ValidUnicode(string input)
         {
             const int UnicodeCharsAfterU = 4;
+            const int ASCIILimit = 255;
+            foreach (var item in input)
+            {
+                if (item > ASCIILimit)
+                {
+                    return true;
+                }
+            }
+
             return input.Contains("\\u") ?
                    input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU :
                    IsQuoted(input);
