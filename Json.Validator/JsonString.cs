@@ -39,7 +39,7 @@ namespace Json
 
         static bool ContainsValidControlCharacters(string input)
         {
-            string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"", "\\u" };
+            string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"" };
 
             foreach (var escapeChar in controlChars)
             {
