@@ -15,11 +15,6 @@ namespace Json
                    HasValidContent(input);
         }
 
-        static bool HasValidContent(string input)
-        {
-            return input.Contains("\\u") ? ValidUnicode(input) : IsQuoted(input);
-        }
-
         static bool IsQuoted(string input)
         {
             const int NumberTwo = 2;
