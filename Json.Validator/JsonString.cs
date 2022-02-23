@@ -58,7 +58,6 @@ namespace Json
 
         static bool ValidUnicode(string input)
         {
-            const int UnicodeCharsAfterU = 4;
             const int ASCIILimit = 255;
             foreach (var item in input)
             {
@@ -68,7 +67,7 @@ namespace Json
                 }
             }
 
-            return input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU;
+            return false;
         }
     }
 }
