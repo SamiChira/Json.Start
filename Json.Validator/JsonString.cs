@@ -56,6 +56,15 @@ namespace Json
             return !ContainsControlCharacters(input);
         }
 
+        static bool ContainsValidUnicode(string input)
+        {
+            const int UnicodeCharsAfterU = 4;
+
+            return input.Contains("u") ?
+                   input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU :
+                   ValidUnicode(input);
+        }
+
         static bool ValidUnicode(string input)
         {
             const int ASCIILimit = 255;
