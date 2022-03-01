@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Json
 {
@@ -39,13 +40,14 @@ namespace Json
 
         static bool ContainsValidControlCharacters(string input)
         {
-            string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"" };
+            const int NumberTwo = 2;
+            string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"", "\\u" };
 
-            foreach (var escapeChar in controlChars)
+            for (int i = 1; i < input.Length; i++)
             {
-                if (input.Contains(escapeChar))
+                if (input[i] == '\\' && !controlChars.Contains(input.Substring(i, NumberTwo)) && input[i + 1] != ' ')
                 {
-                    return true;
+                    return false;
                 }
             }
 
