@@ -64,6 +64,34 @@ namespace Json
                    ValidUnicode(input);
         }
 
+        static bool ValidEscapedUnicodeFormat(string input)
+        {
+            const int NumberOne = 1;
+            const int HexNumberLength = 6;
+            bool[] validUnicodes = { };
+            int unicodeCounter = 0;
+            for (int i = 1; i < input.Length; i++)
+            {
+                StringBuilder unicodeToCheck = new StringBuilder();
+                if (input[i - NumberOne] == '\\' && input[i] == 'u')
+                {
+                    try
+                    {
+                        unicodeToCheck.Append(input.Substring(i - NumberOne, HexNumberLength));
+                        Array.Resize(ref validUnicodes, validUnicodes.Length + NumberOne);
+                        validUnicodes[unicodeCounter++] = CheckElementsOfUnicode(unicodeToCheck.ToString());
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Array.Resize(ref validUnicodes, validUnicodes.Length + NumberOne);
+                        validUnicodes[unicodeCounter++] = false;
+                    }
+                }
+            }
+
+            return !validUnicodes.Contains(false);
+        }
+
         static bool CheckElementsOfUnicode(string unicodeToCheck)
         {
             const int DigitStartPoint = 2;
