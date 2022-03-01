@@ -97,19 +97,5 @@ namespace Json
 
             return true;
         }
-
-        static bool ValidUnicode(string input)
-        {
-            const int ASCIILimit = 255;
-            foreach (var item in input)
-            {
-                if (item > ASCIILimit)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
     }
 }
