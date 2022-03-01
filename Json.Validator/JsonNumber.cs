@@ -11,7 +11,7 @@ namespace Json
                 return false;
             }
 
-            return int.TryParse(input, out int result);
+            return int.TryParse(input, out int result) || double.TryParse(input, out double resultFractional);
         }
     }
 }
