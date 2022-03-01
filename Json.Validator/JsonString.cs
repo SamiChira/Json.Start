@@ -58,9 +58,24 @@ namespace Json
         {
             const int UnicodeCharsAfterU = 4;
 
-            return input.Contains("\\u") ?
+            return input.Contains("u") ?
                    input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU :
                    ValidUnicode(input);
+        }
+
+        static bool CheckElementsOfUnicode(string unicodeToCheck)
+        {
+            const int DigitStartPoint = 2;
+            const int DigitEndPoint = 4;
+            foreach (var item in unicodeToCheck.Substring(DigitStartPoint, DigitEndPoint))
+            {
+                if (item == '"' || item == '\\')
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         static bool ValidUnicode(string input)
