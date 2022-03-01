@@ -15,7 +15,7 @@ namespace Json
 
             return IsQuoted(input) &&
                    ContainsValidControlCharacters(input) &&
-                   ContainsValidUnicode(input);
+                   ValidUnicodeFormat(input);
         }
 
         static bool IsQuoted(string input)
@@ -55,16 +55,7 @@ namespace Json
             return !ContainsControlCharacters(input);
         }
 
-        static bool ContainsValidUnicode(string input)
-        {
-            const int UnicodeCharsAfterU = 4;
-
-            return input.Contains("u") ?
-                   input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU :
-                   ValidUnicode(input);
-        }
-
-        static bool ValidEscapedUnicodeFormat(string input)
+        static bool ValidUnicodeFormat(string input)
         {
             const int NumberOne = 1;
             const int HexNumberLength = 6;
