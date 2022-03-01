@@ -89,7 +89,7 @@ namespace Json
             const int DigitEndPoint = 4;
             foreach (var item in unicodeToCheck.Substring(DigitStartPoint, DigitEndPoint))
             {
-                if (item == '"' || item == '\\')
+                if (item == '"' || item == '\\' || item == ' ')
                 {
                     return false;
                 }
