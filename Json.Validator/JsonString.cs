@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 
 namespace Json
 {
@@ -13,7 +14,7 @@ namespace Json
             }
 
             return IsQuoted(input) &&
-                   ContainsValidControlCharacters(input) ||
+                   ContainsValidControlCharacters(input) &&
                    ContainsValidUnicode(input);
         }
 
