@@ -34,7 +34,7 @@ namespace Json
                 }
             }
 
-            return input.Contains("\\");
+            return false;
         }
 
         static bool ContainsValidControlCharacters(string input)
@@ -56,7 +56,7 @@ namespace Json
         {
             const int UnicodeCharsAfterU = 4;
 
-            return input.Contains("u") ?
+            return input.Contains("\\u") ?
                    input.Length - 1 - input.LastIndexOf("u") - 1 >= UnicodeCharsAfterU :
                    ValidUnicode(input);
         }

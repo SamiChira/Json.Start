@@ -136,7 +136,7 @@ namespace Json.Facts
         [Fact]
         public void DoesNotContainUnfinishedHexNumber()
         {
-            Assert.False(IsJsonString(Quoted(@"a \123 sad")));
+            Assert.False(IsJsonString(Quoted(@"a \u123 sad")));
         }
 
         public static string Quoted(string text)
