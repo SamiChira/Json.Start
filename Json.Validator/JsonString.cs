@@ -14,7 +14,7 @@ namespace Json
             }
 
             return IsQuoted(input) &&
-                   ContainsValidControlCharacters(input) &&
+                   ContainsValidEscapedControlCharacters(input) &&
                    ValidUnicodeFormat(input);
         }
 
