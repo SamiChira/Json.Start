@@ -11,7 +11,12 @@ namespace Json
                 return false;
             }
 
-            return int.TryParse(input, out int result) || double.TryParse(input, out double resultFractional);
+            return HasValidContent(input);
+        }
+
+        static bool HasValidContent(string input)
+        {
+            return double.TryParse(input, out double resultFractional);
         }
 
         static bool ValidStartAndEndFormat(string input)
