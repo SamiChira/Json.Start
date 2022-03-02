@@ -87,11 +87,9 @@ namespace Json
 
         static bool CheckElementsOfUnicode(string unicodeToCheck)
         {
-            const int DigitStartPoint = 2;
-            const int DigitEndPoint = 4;
-            foreach (var item in unicodeToCheck.Substring(DigitStartPoint, DigitEndPoint))
+            foreach (var item in unicodeToCheck.ToLower())
             {
-                if (item == '"' || item == '\\' || item == ' ')
+                if (item < '0' || item > '9' && item < 'a' || item > 'f')
                 {
                     return false;
                 }
