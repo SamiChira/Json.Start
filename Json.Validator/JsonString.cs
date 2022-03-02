@@ -8,19 +8,14 @@ namespace Json
     {
         public static bool IsJsonString(string input)
         {
-            if (string.IsNullOrWhiteSpace(input) || input.Trim('"').EndsWith('\\'))
-            {
-                return false;
-            }
-
-            return IsQuoted(input) &&
-                   ContainsValidEscapedControlCharacters(input) &&
-                   ValidUnicodeFormat(input);
+            return HasContent(input) &&
+                   IsQuoted(input) &&
+                   !ContainsControlCharacters(input);
         }
 
         static bool IsQuoted(string input)
         {
-            return input.StartsWith('"') && input.EndsWith('"') && input.Length > 1;
+            return input.StartsWith('"') && input.EndsWith('"');
         }
 
         static bool ContainsControlCharacters(string input)
@@ -34,6 +29,16 @@ namespace Json
             }
 
             return false;
+        }
+
+        static bool HasContent(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+
+            return input.Contains('\\') ? ContainsValidEscapedControlCharacters(input) : input.Length > 1;
         }
 
         static bool ContainsValidEscapedControlCharacters(string input)
