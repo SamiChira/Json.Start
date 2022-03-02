@@ -20,8 +20,7 @@ namespace Json
 
         static bool IsQuoted(string input)
         {
-            const int NumberTwo = 2;
-            return input.StartsWith('"') && input.EndsWith('"') && input.Length >= NumberTwo;
+            return input.StartsWith('"') && input.EndsWith('"') && input.Length > 1;
         }
 
         static bool ContainsControlCharacters(string input)
