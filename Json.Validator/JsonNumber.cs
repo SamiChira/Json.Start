@@ -6,12 +6,14 @@ namespace Json
     {
         public static bool IsJsonNumber(string input)
         {
-            if (string.IsNullOrEmpty(input) || ValidStartAndEndFormat(input))
-            {
-                return false;
-            }
+            return HasContent(input) &&
+                   !ValidStartAndEndFormat(input) &&
+                   HasValidContent(input);
+        }
 
-            return HasValidContent(input);
+        static bool HasContent(string input)
+        {
+            return !string.IsNullOrEmpty(input);
         }
 
         static bool HasValidContent(string input)
