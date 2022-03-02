@@ -36,20 +36,25 @@ namespace Json
             return false;
         }
 
-        static bool ContainsValidControlCharacters(string input)
+        static bool ContainsValidEscapedControlCharacters(string input)
         {
-            const int NumberTwo = 2;
-            string[] controlChars = { "\\b", "\\t", "\\r", "\\n", "\\f", "\\\\", "\\/", "\\\"", "\\u" };
-
-            for (int i = 1; i < input.Length; i++)
+            const string controlChars = "\\b \\t \\r \\n \\f \\/ \\\" \\u \\\\";
+            const int HexDigitsToCheck = 4;
+            const int ElementsToCheck = 3;
+            for (int i = 0; i < input.Length - ElementsToCheck; i++)
             {
-                if (input[i] == '\\' && !controlChars.Contains(input.Substring(i, NumberTwo)) && input[i + 1] != ' ')
+                string elementsToCheck = input.Substring(i, ElementsToCheck);
+                if (elementsToCheck.Contains("\\u") && (input.Length - 1 - input.IndexOf('u') > HexDigitsToCheck))
                 {
-                    return false;
+                    return CheckElementsOfUnicode(input.Substring(input.IndexOf('u') + 1, HexDigitsToCheck));
+                }
+                else if (controlChars.Contains(input.Substring(i, ElementsToCheck)))
+                {
+                    return true;
                 }
             }
 
-            return !ContainsControlCharacters(input);
+            return false;
         }
 
         static bool ValidUnicodeFormat(string input)
