@@ -6,8 +6,8 @@ namespace Json
     {
         public static bool IsJsonString(string input)
         {
-            return HasContent(input) &&
-                   IsQuoted(input) &&
+            return IsQuoted(input) &&
+                   HasValidContent(input) &&
                    !ContainsControlCharacters(input);
         }
 
@@ -29,7 +29,7 @@ namespace Json
             return false;
         }
 
-        static bool HasContent(string input)
+        static bool HasValidContent(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -41,7 +41,7 @@ namespace Json
 
         static bool ContainsValidEscapedControlCharacters(string input)
         {
-            const string controlChars = "\\b \\t \\r \\n \\f \\/ \\\" \\u \\\\";
+            const string controlChars = "\\b \\t \\r \\n \\f \\/ \\\" \\u";
             const int HexDigitsToCheck = 4;
             const int ElementsToCheck = 3;
             for (int i = 0; i < input.Length - ElementsToCheck; i++)
@@ -57,7 +57,12 @@ namespace Json
                 }
             }
 
-            return false;
+            return ContainsReverseSolidus(input);
+        }
+
+        static bool ContainsReverseSolidus(string input)
+        {
+            return input.Contains("\\\\") && !input.EndsWith("\\");
         }
 
         static bool CheckElementsOfUnicode(string unicodeToCheck)
