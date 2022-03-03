@@ -36,22 +36,17 @@ namespace Json
                 return false;
             }
 
-            return input.Contains('\\') ? ContainsValidEscapedControlCharacters(input) : input.Length > 1;
+            return input.Contains("\\u") ? ContainsValidEscapedControlCharacters(input) : input.Length > 1;
         }
 
         static bool ContainsValidEscapedControlCharacters(string input)
         {
             const string controlChars = "\\b \\t \\r \\n \\f \\/ \\\" \\u";
-            const int HexDigitsToCheck = 4;
             const int ElementsToCheck = 3;
             for (int i = 0; i < input.Length - ElementsToCheck; i++)
             {
                 string elementsToCheck = input.Substring(i, ElementsToCheck);
-                if (elementsToCheck.Contains("\\u") && (input.Length - 1 - input.IndexOf('u') > HexDigitsToCheck))
-                {
-                    return CheckElementsOfUnicode(input.Substring(input.IndexOf('u') + 1, HexDigitsToCheck));
-                }
-                else if (controlChars.Contains(input.Substring(i, ElementsToCheck)))
+                if (controlChars.Contains(input.Substring(i, ElementsToCheck)))
                 {
                     return true;
                 }
@@ -63,6 +58,14 @@ namespace Json
         static bool ContainsReverseSolidus(string input)
         {
             return input.Contains("\\\\") && !input.EndsWith("\\");
+        }
+
+        static bool ContainsValidUnicode(string input)
+        {
+            const int HexDigitsToCheck = 4;
+
+            return input.Contains("\\u") && (input.Length - 1 - input.IndexOf('u') > HexDigitsToCheck) &&
+                   CheckElementsOfUnicode(input.Substring(input.IndexOf('u') + 1, HexDigitsToCheck));
         }
 
         static bool CheckElementsOfUnicode(string unicodeToCheck)
