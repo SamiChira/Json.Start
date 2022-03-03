@@ -6,8 +6,8 @@ namespace Json
     {
         public static bool IsJsonString(string input)
         {
-            return IsQuoted(input) &&
-                   HasValidContent(input) &&
+            return HasValidContent(input) &&
+                   IsQuoted(input) &&
                    !ContainsControlCharacters(input);
         }
 
