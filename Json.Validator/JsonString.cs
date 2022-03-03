@@ -45,7 +45,6 @@ namespace Json
             const int ElementsToCheck = 3;
             for (int i = 0; i < input.Length - ElementsToCheck; i++)
             {
-                string elementsToCheck = input.Substring(i, ElementsToCheck);
                 if (controlChars.Contains(input.Substring(i, ElementsToCheck)))
                 {
                     return true;
