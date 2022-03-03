@@ -36,12 +36,12 @@ namespace Json
                 return false;
             }
 
-            return input.Contains("\\u") ? ContainsValidEscapedControlCharacters(input) : input.Length > 1;
+            return input.Contains("\\") ? ContainsValidEscapedControlCharacters(input) || ContainsValidUnicode(input) : input.Length > 1;
         }
 
         static bool ContainsValidEscapedControlCharacters(string input)
         {
-            const string controlChars = "\\b \\t \\r \\n \\f \\/ \\\" \\u";
+            const string controlChars = "\\b \\t \\r \\n \\f \\/ \\\" ";
             const int ElementsToCheck = 3;
             for (int i = 0; i < input.Length - ElementsToCheck; i++)
             {
