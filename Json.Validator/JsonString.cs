@@ -33,12 +33,12 @@ namespace Json
 
         static bool HasValidContent(string input)
         {
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input) || input.Length < MinimumLength)
             {
                 return false;
             }
 
-            return input.Contains("\\") ? ContainsValidEscapedControlCharacters(input) || ContainsValidUnicode(input) : input.Length > 1;
+            return input.Contains("u") ? ContainsValidUnicode(input) : ContainsValidEscapedControlCharacters(input);
         }
 
         static bool ContainsValidEscapedControlCharacters(string input)
