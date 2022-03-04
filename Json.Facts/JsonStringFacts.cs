@@ -136,13 +136,25 @@ namespace Json.Facts
         [Fact]
         public void DoesNotContainUnfinishedHexNumber()
         {
-            Assert.False(IsJsonString(Quoted(@"a \u123 sad")));
+            Assert.False(IsJsonString(Quoted(@"a \u1234 sad \u12")));
         }
 
         [Fact]
         public void DoesNotStartWithAnUnfinishedHexNumber()
         {
             Assert.False(IsJsonString(Quoted(@"\u123 sad")));
+        }
+
+        [Fact]
+        public void CanContainMultipleValidEscapeControlCharacters()
+        {
+            Assert.True(IsJsonString(Quoted(@"a \b s \t v \f a \r a \n")));
+        }
+
+        [Fact]
+        public void CanContainMultipleValiUnicodeCharacters()
+        {
+            Assert.True(IsJsonString(Quoted(@"a \u123F s \u1234 v \u1235 a \uf23b ")));
         }
 
         public static string Quoted(string text)

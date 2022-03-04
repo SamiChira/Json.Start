@@ -66,7 +66,8 @@ namespace Json
             for (int i = 0; i < input.Length - 1; i++)
             {
                 if (input[i] == '\\' && input[i + 1] == 'u' &&
-                   (input.Length - i < HexDigitsToCheck || !CheckElementsOfUnicode(input.Substring(input.IndexOf('u', i) + 1, HexDigitsToCheck))))
+                   (input.Length - (input.IndexOf('u', i) + 1) < HexDigitsToCheck ||
+                   !CheckElementsOfUnicode(input.Substring(input.IndexOf('u', i) + 1, HexDigitsToCheck))))
                 {
                     return false;
                 }
