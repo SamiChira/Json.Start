@@ -157,6 +157,18 @@ namespace Json.Facts
             Assert.True(IsJsonString(Quoted(@"a \u123F s \u1234 v \u1235 a \uf23b ")));
         }
 
+        [Fact]
+        public void DoesNotContainUnrecognizedEscapedCharacter()
+        {
+            Assert.False(IsJsonString(Quoted(@"a \t a \v a \t")));
+        }
+
+        [Fact]
+        public void CanContainDigits()
+        {
+            Assert.True(IsJsonString(Quoted("1234")));
+        }
+
         public static string Quoted(string text)
             => $"\"{text}\"";
     }
