@@ -4,6 +4,8 @@ namespace Json
 {
     public static class JsonString
     {
+        const int MinimumLength = 2;
+
         public static bool IsJsonString(string input)
         {
             return HasValidContent(input) &&
@@ -51,12 +53,12 @@ namespace Json
                 }
             }
 
-            return ContainsReverseSolidus(input);
+            return EndsWithReverseSolidus(input);
         }
 
-        static bool ContainsReverseSolidus(string input)
+        static bool EndsWithReverseSolidus(string input)
         {
-            return input.Contains("\\\\") && !input.EndsWith("\\");
+            return input.Length - input.LastIndexOf('\\') < MinimumLength;
         }
 
         static bool ContainsValidUnicode(string input)
