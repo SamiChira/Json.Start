@@ -62,9 +62,16 @@ namespace Json
         static bool ContainsValidUnicode(string input)
         {
             const int HexDigitsToCheck = 4;
+            for (int i = 0; i < input.Length - 1; i++)
+            {
+                if (input[i] == '\\' && input[i + 1] == 'u' &&
+                   (input.Length - i < HexDigitsToCheck || !CheckElementsOfUnicode(input.Substring(input.IndexOf('u', i) + 1, HexDigitsToCheck))))
+                {
+                    return false;
+                }
+            }
 
-            return input.Contains("\\u") && (input.Length - 1 - input.IndexOf('u') > HexDigitsToCheck) &&
-                   CheckElementsOfUnicode(input.Substring(input.IndexOf('u') + 1, HexDigitsToCheck));
+            return true;
         }
 
         static bool CheckElementsOfUnicode(string unicodeToCheck)
