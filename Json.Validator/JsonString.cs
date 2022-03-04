@@ -43,22 +43,21 @@ namespace Json
 
         static bool ContainsValidEscapedControlCharacters(string input)
         {
-            const string controlChars = "\\b \\t \\r \\n \\f \\/ \\\" ";
-            const int ElementsToCheck = 3;
-            for (int i = 0; i < input.Length - ElementsToCheck; i++)
+            const string controlChars = "b t r n f / \" ";
+            for (int i = 0; i < input.Length - 1; i++)
             {
-                if (controlChars.Contains(input.Substring(i, ElementsToCheck)))
+                if (input[i] == '\\' && !controlChars.Contains(input.Substring(i + 1, 1)) && input.Substring(i, MinimumLength) != "\\\\")
                 {
-                    return true;
+                    return false;
                 }
             }
 
-            return EndsWithReverseSolidus(input);
+            return !EndsWithReverseSolidus(input);
         }
 
         static bool EndsWithReverseSolidus(string input)
         {
-            return input.Length - input.LastIndexOf('\\') < MinimumLength;
+            return input.Length - input.LastIndexOf('\\') <= MinimumLength;
         }
 
         static bool ContainsValidUnicode(string input)
