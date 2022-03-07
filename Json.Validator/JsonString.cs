@@ -38,7 +38,7 @@ namespace Json
                 return false;
             }
 
-            return input.Contains("u") ? ContainsValidUnicode(input) : ContainsValidEscapedControlCharacters(input);
+            return ContainsValidEscapedControlCharacters(input);
         }
 
         static bool ContainsValidEscapedControlCharacters(string input)
