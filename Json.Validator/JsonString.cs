@@ -46,18 +46,13 @@ namespace Json
             const string controlChars = "btrnf/\"u";
             for (int i = 0; i < input.Length - 1; i++)
             {
-                if (input[i] == '\\' && !controlChars.Contains(input[i + 1]) && input.Substring(i, MinimumLength) != "\\\\")
+                if (input[i] == '\\' && (!controlChars.Contains(input[i + 1].ToString()) || input[i + 1] == 'u' && !ContainsValidUnicode(input)))
                 {
                     return false;
                 }
             }
 
             return true;
-        }
-
-        static bool EndsWithReverseSolidus(string input)
-        {
-            return input.Length - input.LastIndexOf('\\') <= MinimumLength;
         }
 
         static bool ContainsValidUnicode(string input)
