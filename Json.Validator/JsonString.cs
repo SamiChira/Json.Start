@@ -43,23 +43,8 @@ namespace Json
             const string controlChars = "btrnf/\"u";
             for (int i = 0; i < input.Length - 1; i++)
             {
-                if (input[i] == '\\' && (!controlChars.Contains(input[i + 1].ToString()) || input[i + 1] == 'u' && !ContainsValidUnicode(input)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        static bool ContainsValidUnicode(string input)
-        {
-            const int HexDigitsToCheck = 4;
-            for (int i = 0; i < input.Length - 1; i++)
-            {
-                if (input[i] == '\\' && input[i + 1] == 'u' &&
-                   (input.Length - (input.IndexOf('u', i) + 1) < HexDigitsToCheck ||
-                   !CheckElementsOfUnicode(i + 1, input)))
+                if (input[i] == '\\'
+                   && (input[i + 1] == 'u' ? !CheckElementsOfUnicode(i + 1, input) : !controlChars.Contains(input[i + 1])))
                 {
                     return false;
                 }
