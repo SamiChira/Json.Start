@@ -59,7 +59,7 @@ namespace Json
             {
                 if (input[i] == '\\' && input[i + 1] == 'u' &&
                    (input.Length - (input.IndexOf('u', i) + 1) < HexDigitsToCheck ||
-                   !CheckElementsOfUnicode(input.Substring(input.IndexOf('u', i) + 1, HexDigitsToCheck))))
+                   !CheckElementsOfUnicode(i + 1, input)))
                 {
                     return false;
                 }
@@ -68,14 +68,23 @@ namespace Json
             return true;
         }
 
-        static bool CheckElementsOfUnicode(string unicodeToCheck)
+        static bool CheckElementsOfUnicode(int indexOfU, string input)
         {
-            foreach (var item in unicodeToCheck.ToLower())
+            const int HexDigitsToCheck = 4;
+            try
             {
-                if (item < '0' || item > '9' && item < 'a' || item > 'f')
+                string unicodeToCheck = input[(indexOfU + 1) .. (indexOfU + 1 + HexDigitsToCheck)];
+                foreach (var item in unicodeToCheck.ToLower())
                 {
-                    return false;
+                    if (item < '0' || item > '9' && item < 'a' || item > 'f')
+                    {
+                        return false;
+                    }
                 }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return false;
             }
 
             return true;
