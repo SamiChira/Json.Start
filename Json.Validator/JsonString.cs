@@ -44,13 +44,14 @@ namespace Json
             for (int i = 0; i < input.Length - 1; i++)
             {
                 if (input[i] == '\\'
-                   && (input[i + 1] == 'u' ? !CheckElementsOfUnicode(i + 1, input) : !controlChars.Contains(input[i + 1])))
+                   && (input[i + 1] == 'u' ? !CheckElementsOfUnicode(i + 1, input) : !controlChars.Contains(input[i + 1]))
+                   && !input.Contains("\\\\"))
                 {
                     return false;
                 }
             }
 
-            return true;
+            return input[^MinimumLength] != '\\';
         }
 
         static bool CheckElementsOfUnicode(int indexOfU, string input)
