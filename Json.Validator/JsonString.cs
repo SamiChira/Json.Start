@@ -33,12 +33,9 @@ namespace Json
 
         static bool HasValidContent(string input)
         {
-            if (string.IsNullOrEmpty(input) || input.Length < MinimumLength)
-            {
-                return false;
-            }
-
-            return ContainsValidEscapedControlCharacters(input);
+            return !string.IsNullOrEmpty(input) &&
+                   input.Length >= MinimumLength &&
+                   ContainsValidEscapedControlCharacters(input);
         }
 
         static bool ContainsValidEscapedControlCharacters(string input)
