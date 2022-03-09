@@ -56,20 +56,18 @@ namespace Json
         static bool CheckElementsOfUnicode(int indexOfU, string input)
         {
             const int HexDigitsToCheck = 4;
-            try
-            {
-                string unicodeToCheck = input[(indexOfU + 1) .. (indexOfU + 1 + HexDigitsToCheck)];
-                foreach (var item in unicodeToCheck.ToLower())
-                {
-                    if (item < '0' || item > '9' && item < 'a' || item > 'f')
-                    {
-                        return false;
-                    }
-                }
-            }
-            catch (ArgumentOutOfRangeException)
+            if (indexOfU + HexDigitsToCheck >= input.Length)
             {
                 return false;
+            }
+
+            string unicodeToCheck = input[(indexOfU + 1) .. (indexOfU + 1 + HexDigitsToCheck)];
+            foreach (var item in unicodeToCheck.ToLower())
+            {
+                if (item < '0' || item > '9' && item < 'a' || item > 'f')
+                {
+                    return false;
+                }
             }
 
             return true;
