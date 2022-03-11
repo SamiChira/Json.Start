@@ -42,21 +42,32 @@ namespace Json
         {
             const string controlChars = "btrnfu/\"\\";
             const int UnicodeLength = 6;
-            if (input.Length <= 1)
+            int counter = 0;
+            while (input.Length - counter > 1)
             {
-                return input.Length == 1;
+                if (input[counter] == '\\'
+                    && (!controlChars.Contains(input[counter + 1])
+                    || input[counter + 1] == 'u'
+                    && !CheckElementsOfUnicode(counter + 1, input)))
+                {
+                    return false;
+                }
+                else if (input[counter] == '\\' && input[counter + 1] == 'u')
+                {
+                    counter += UnicodeLength;
+                }
+                else if (input[counter] == '\\'
+                    && controlChars.Contains(input[counter + 1]))
+                {
+                    counter += MinimumLength;
+                }
+                else
+                {
+                    counter++;
+                }
             }
 
-            if (input[0] == '\\' && (!controlChars.Contains(input[1]) || input[1] == 'u' && !CheckElementsOfUnicode(1, input)))
-            {
-                return false;
-            }
-            else if (input[0] == '\\' && controlChars.Contains(input[1]))
-            {
-                return input[1] == 'u' ? ContainsValidEscapedControlCharacters(input[UnicodeLength..]) : ContainsValidEscapedControlCharacters(input[MinimumLength..]);
-            }
-
-            return ContainsValidEscapedControlCharacters(input[1..]);
+            return input.Length - counter == 1;
         }
 
         static bool CheckElementsOfUnicode(int indexOfU, string input)
