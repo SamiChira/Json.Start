@@ -40,18 +40,23 @@ namespace Json
 
         static bool ContainsValidEscapedControlCharacters(string input)
         {
-            const string controlChars = "btrnf/\"u\\";
-            for (int i = 0; i < input.Length - 1; i++)
+            const string controlChars = "btrnfu/\"\\";
+            const int UnicodeLength = 6;
+            if (input.Length <= 1)
             {
-                if (input[i] == '\\'
-                   && input[i - 1] != '\\'
-                   && (input[i + 1] == 'u' ? !CheckElementsOfUnicode(i + 1, input) : !controlChars.Contains(input[i + 1])))
-                {
-                    return false;
-                }
+                return input.Length == 1;
             }
 
-            return !input.EndsWith("\\\"");
+            if (input[0] == '\\' && (!controlChars.Contains(input[1]) || input[1] == 'u' && !CheckElementsOfUnicode(1, input)))
+            {
+                return false;
+            }
+            else if (input[0] == '\\' && controlChars.Contains(input[1]))
+            {
+                return input[1] == 'u' ? ContainsValidEscapedControlCharacters(input[UnicodeLength..]) : ContainsValidEscapedControlCharacters(input[MinimumLength..]);
+            }
+
+            return ContainsValidEscapedControlCharacters(input[1..]);
         }
 
         static bool CheckElementsOfUnicode(int indexOfU, string input)
