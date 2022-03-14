@@ -18,12 +18,14 @@ namespace Json
 
         private static bool IsValidFraction(string input, int dotIndex)
         {
-            throw new NotImplementedException();
+            return dotIndex > 0 ? IsInteger(input, dotIndex) && IsDigits(input[(dotIndex + 1) ..])
+                : IsDigits(input);
         }
 
-        private static bool IsInteger(string input)
+        private static bool IsInteger(string input, int dotIndex)
         {
-            return IsDigits(input) && !StartsWithZero(input);
+            return dotIndex > 0 ? IsDigits(input[..dotIndex]) && !StartsWithZero(input[..dotIndex])
+                    : IsDigits(input);
         }
 
         static bool IsDigits(string input)
