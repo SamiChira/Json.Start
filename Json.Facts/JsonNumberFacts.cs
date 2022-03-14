@@ -24,7 +24,7 @@ namespace Json.Facts
             Assert.True(IsJsonNumber("7"));
         }
 
-        [Fact(Skip = "Remove after implement")]
+        [Fact]
         public void CanHaveMultipleDigits()
         {
             Assert.True(IsJsonNumber("70"));
