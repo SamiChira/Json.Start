@@ -73,7 +73,7 @@ namespace Json.Facts
             Assert.True(IsJsonNumber("10.00000001"));
         }
 
-        [Fact(Skip = "Remove after implement")]
+        [Fact]
         public void DoesNotEndWithADot()
         {
             Assert.False(IsJsonNumber("12."));
