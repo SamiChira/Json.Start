@@ -79,7 +79,7 @@ namespace Json.Facts
             Assert.False(IsJsonNumber("12."));
         }
 
-        [Fact(Skip = "Remove after implement")]
+        [Fact]
         public void DoesNotHaveTwoFractionParts()
         {
             Assert.False(IsJsonNumber("12.34.56"));
