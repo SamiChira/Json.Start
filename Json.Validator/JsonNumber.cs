@@ -24,17 +24,12 @@ namespace Json
 
         private static bool IsInteger(string input, int dotIndex)
         {
-            return dotIndex > 0 ? IsDigits(input[..dotIndex])
-                    : IsDigits(input) && !StartsWithZero(input[..dotIndex]);
+            return dotIndex > 0 ? IsDigits(input[..dotIndex]) && !StartsWithZero(input[..dotIndex])
+                    : IsDigits(input) && !StartsWithZero(input);
         }
 
         static bool IsDigits(string input)
         {
-            if (string.IsNullOrEmpty(input))
-            {
-                return false;
-            }
-
             foreach (var item in input)
             {
                 if (item != '-' && (item < '0' || item > '9'))
