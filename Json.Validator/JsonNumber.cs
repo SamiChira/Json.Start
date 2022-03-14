@@ -6,7 +6,19 @@ namespace Json
     {
         public static bool IsJsonNumber(string input)
         {
-            return IsInteger(input);
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+
+            int dotIndex = input.IndexOf('.');
+            return IsInteger(input)
+                   && IsValidFraction(input, dotIndex);
+        }
+
+        private static bool IsValidFraction(string input, int dotIndex)
+        {
+            throw new NotImplementedException();
         }
 
         private static bool IsInteger(string input)
