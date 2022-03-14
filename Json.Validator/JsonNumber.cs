@@ -12,7 +12,7 @@ namespace Json
             }
 
             int dotIndex = input.IndexOf('.');
-            return IsInteger(input)
+            return IsInteger(input, dotIndex)
                    && IsValidFraction(input, dotIndex);
         }
 
@@ -24,8 +24,8 @@ namespace Json
 
         private static bool IsInteger(string input, int dotIndex)
         {
-            return dotIndex > 0 ? IsDigits(input[..dotIndex]) && !StartsWithZero(input[..dotIndex])
-                    : IsDigits(input);
+            return dotIndex > 0 ? IsDigits(input[..dotIndex])
+                    : IsDigits(input) && !StartsWithZero(input[..dotIndex]);
         }
 
         static bool IsDigits(string input)
