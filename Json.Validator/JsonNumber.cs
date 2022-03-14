@@ -11,7 +11,7 @@ namespace Json
 
         static bool IsDigit(string input)
         {
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input) || input[0] == '0')
             {
                 return false;
             }
