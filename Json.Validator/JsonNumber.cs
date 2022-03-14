@@ -30,6 +30,11 @@ namespace Json
 
         static bool IsDigits(string input)
         {
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+
             foreach (var item in input)
             {
                 if (item != '-' && (item < '0' || item > '9'))
