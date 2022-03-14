@@ -6,10 +6,15 @@ namespace Json
     {
         public static bool IsJsonNumber(string input)
         {
-            return IsDigit(input);
+            return IsInteger(input);
         }
 
-        static bool IsDigit(string input)
+        private static bool IsInteger(string input)
+        {
+            return IsDigits(input) && !StartsWithZero(input);
+        }
+
+        static bool IsDigits(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -18,7 +23,7 @@ namespace Json
 
             foreach (var item in input)
             {
-                if (StartsWithZero(input) || (item < 48 || item > 57))
+                if (item != '-' && (item < '0' || item > '9'))
                 {
                     return false;
                 }
