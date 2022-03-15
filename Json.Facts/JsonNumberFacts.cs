@@ -115,7 +115,7 @@ namespace Json.Facts
             Assert.True(IsJsonNumber("61e-9"));
         }
 
-        [Fact(Skip = "Remove after implement")]
+        [Fact]
         public void CanHaveFractionAndExponent()
         {
             Assert.True(IsJsonNumber("12.34E3"));

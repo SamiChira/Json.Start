@@ -25,7 +25,7 @@ namespace Json
 
         private static bool IsValidFraction(string input, int dotIndex, int exponentIndex)
         {
-            if (dotIndex > 0 && exponentIndex > 0 && dotIndex > exponentIndex)
+            if (dotIndex > 0 && exponentIndex > 0 && dotIndex < exponentIndex)
             {
                 return IsDigits(input[(dotIndex + 1) ..exponentIndex]);
             }
@@ -41,7 +41,11 @@ namespace Json
 
         private static bool IsInteger(string input, int dotIndex, int exponentIndex)
         {
-            if (dotIndex > 0 && exponentIndex < 0)
+            if (dotIndex > 0 && exponentIndex > 0)
+            {
+                return IsDigits(input[..dotIndex]);
+            }
+            else if (dotIndex > 0 && exponentIndex < 0)
             {
                 return IsDigits(input[..dotIndex]) && !StartsWithZero(input[..dotIndex]);
             }
