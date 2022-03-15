@@ -18,6 +18,11 @@ namespace Json
                    && IsValidExponent(input, exponentIndex);
         }
 
+        private static bool IsValidExponent(string input, int exponentIndex)
+        {
+            return exponentIndex > 0 ? IsDigits(input[(exponentIndex + 1)..]) : true;
+        }
+
         private static bool IsValidFraction(string input, int dotIndex, int exponentIndex)
         {
             return dotIndex > 0 ? IsInteger(input, dotIndex) && IsDigits(input[(dotIndex + 1) ..])
