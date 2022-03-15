@@ -55,20 +55,32 @@ namespace Json
 
         static bool IsDigits(string input)
         {
-            if (string.IsNullOrEmpty(input))
+            int counter = 0;
+            string stringToCheck = StartWithPlusOrMinus(input) ? input[1..] : input;
+            int plusOrMinusCounter = 0;
+            while (stringToCheck.Length - counter > 0)
             {
-                return false;
-            }
-
-            foreach (var item in input)
-            {
-                if (item != '-' && (item < '0' || item > '9'))
+                if (stringToCheck[counter] == '-' || stringToCheck[counter] == '+')
+                {
+                    plusOrMinusCounter++;
+                    counter++;
+                }
+                else if (stringToCheck[counter] < '0'
+                        || stringToCheck[counter] > '9'
+                        || plusOrMinusCounter > 0)
                 {
                     return false;
                 }
+
+                counter++;
             }
 
-            return true;
+            return stringToCheck.Length > 0;
+        }
+
+        private static bool StartWithPlusOrMinus(string input)
+        {
+            return input.StartsWith('+') || input.StartsWith('-');
         }
 
         private static bool StartsWithZero(string input)
