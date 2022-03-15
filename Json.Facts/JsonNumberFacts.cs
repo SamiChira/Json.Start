@@ -109,7 +109,7 @@ namespace Json.Facts
             Assert.True(IsJsonNumber("12e+3"));
         }
 
-        [Fact(Skip = "Remove after implement")]
+        [Fact]
         public void TheExponentCanBeNegative()
         {
             Assert.True(IsJsonNumber("61e-9"));
