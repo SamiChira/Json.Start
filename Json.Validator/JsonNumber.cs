@@ -20,13 +20,23 @@ namespace Json
 
         private static bool IsValidExponent(string input, int exponentIndex)
         {
-            return exponentIndex > 0 ? IsDigits(input[(exponentIndex + 1)..]) : true;
+            return exponentIndex <= 1 || IsDigits(input[(exponentIndex + 1) ..]);
         }
 
         private static bool IsValidFraction(string input, int dotIndex, int exponentIndex)
         {
-            return dotIndex > 0 ? IsInteger(input, dotIndex) && IsDigits(input[(dotIndex + 1) ..])
-                : IsDigits(input);
+            if (dotIndex > 0 && exponentIndex > 0 && dotIndex > exponentIndex)
+            {
+                return IsDigits(input[(dotIndex + 1) ..exponentIndex]);
+            }
+            else if (dotIndex > 0 && exponentIndex < 0)
+            {
+                return IsDigits(input[(dotIndex + 1) ..]);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private static bool IsInteger(string input, int dotIndex, int exponentIndex)
