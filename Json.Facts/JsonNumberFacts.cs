@@ -97,7 +97,7 @@ namespace Json.Facts
             Assert.True(IsJsonNumber("12e3"));
         }
 
-        [Fact(Skip = "Remove after implement")]
+        [Fact]
         public void TheExponentCanStartWithCapitalE()
         {
             Assert.True(IsJsonNumber("12E3"));
