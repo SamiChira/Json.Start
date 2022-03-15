@@ -146,5 +146,13 @@ namespace Json.Facts
         {
             Assert.False(IsJsonNumber("22e3.3"));
         }
+
+        [Fact]
+        public void TheExponentDoesNotContainMultiplePlusOrMinus()
+        {
+            Assert.False(IsJsonNumber("22.e+2+2"));
+            Assert.False(IsJsonNumber("22.e-2-2"));
+            Assert.False(IsJsonNumber("22.e+2-2"));
+        }
     }
 }
