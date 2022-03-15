@@ -41,8 +41,16 @@ namespace Json
 
         private static bool IsInteger(string input, int dotIndex, int exponentIndex)
         {
-            return dotIndex > 0 ? IsDigits(input[..dotIndex]) && !StartsWithZero(input[..dotIndex])
-                    : IsDigits(input) && !StartsWithZero(input);
+            if (dotIndex > 0 && exponentIndex < 0)
+            {
+                return IsDigits(input[..dotIndex]) && !StartsWithZero(input[..dotIndex]);
+            }
+            else if (exponentIndex > 0 && dotIndex < 0)
+            {
+                return IsDigits(input[..exponentIndex]) && !StartsWithZero(input[..exponentIndex]);
+            }
+
+            return IsDigits(input) && !StartsWithZero(input);
         }
 
         static bool IsDigits(string input)
