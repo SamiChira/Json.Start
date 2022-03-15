@@ -12,17 +12,19 @@ namespace Json
             }
 
             int dotIndex = input.IndexOf('.');
-            return IsInteger(input, dotIndex)
-                   && IsValidFraction(input, dotIndex);
+            int exponentIndex = input.IndexOfAny(new[] { 'e', 'E' });
+            return IsInteger(input, dotIndex, exponentIndex)
+                   && IsValidFraction(input, dotIndex, exponentIndex)
+                   && IsValidExponent(input, exponentIndex);
         }
 
-        private static bool IsValidFraction(string input, int dotIndex)
+        private static bool IsValidFraction(string input, int dotIndex, int exponentIndex)
         {
             return dotIndex > 0 ? IsInteger(input, dotIndex) && IsDigits(input[(dotIndex + 1) ..])
                 : IsDigits(input);
         }
 
-        private static bool IsInteger(string input, int dotIndex)
+        private static bool IsInteger(string input, int dotIndex, int exponentIndex)
         {
             return dotIndex > 0 ? IsDigits(input[..dotIndex]) && !StartsWithZero(input[..dotIndex])
                     : IsDigits(input) && !StartsWithZero(input);
