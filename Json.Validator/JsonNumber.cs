@@ -68,10 +68,10 @@ namespace Json
                 {
                     plusOrMinusCounter++;
                     counter++;
+                    continue;
                 }
                 else if (stringToCheck[counter] < '0'
-                        || stringToCheck[counter] > '9'
-                        || plusOrMinusCounter > 0)
+                        || stringToCheck[counter] > '9')
                 {
                     return false;
                 }
@@ -79,7 +79,7 @@ namespace Json
                 counter++;
             }
 
-            return stringToCheck.Length > 0;
+            return stringToCheck.Length > 0 && plusOrMinusCounter <= 0;
         }
 
         private static bool StartWithPlusOrMinus(string input)
