@@ -154,5 +154,13 @@ namespace Json.Facts
             Assert.False(IsJsonNumber("22.e-2-2"));
             Assert.False(IsJsonNumber("22.e+2-2"));
         }
+
+        [Fact]
+        public void TheNumberDoesNotStartWithMultiplePlusorMinus()
+        {
+            Assert.False(IsJsonNumber("-+0"));
+            Assert.False(IsJsonNumber("--0"));
+            Assert.False(IsJsonNumber("++0"));
+        }
     }
 }
