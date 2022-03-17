@@ -65,7 +65,7 @@ namespace Json
                 return input[..dotIndex];
             }
 
-            return exponentIndex > 0 ? input[.. exponentIndex] : "";
+            return exponentIndex > 0 ? input[..exponentIndex] : input;
         }
 
         static bool IsDigits(string input)
