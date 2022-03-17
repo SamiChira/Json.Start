@@ -15,12 +15,12 @@ namespace Json
             int exponentIndex = input.IndexOfAny(new[] { 'e', 'E' });
             return Integer(input, dotIndex, exponentIndex)
                    && Fraction(input, dotIndex, exponentIndex)
-                   && IsValidExponent(input, exponentIndex);
+                   && Exponent(input, exponentIndex);
         }
 
-        private static bool IsValidExponent(string input, int exponentIndex)
+        private static string Exponent(string input, int exponentIndex)
         {
-            return exponentIndex <= 1 || IsDigits(input[(exponentIndex + 1) ..]);
+            return exponentIndex > 0 ? input[exponentIndex ..] : "";
         }
 
         private static string Fraction(string input, int dotIndex, int exponentIndex)
