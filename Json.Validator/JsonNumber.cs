@@ -14,7 +14,7 @@ namespace Json
             int dotIndex = input.IndexOf('.');
             int exponentIndex = input.IndexOfAny(new[] { 'e', 'E' });
             return Integer(input, dotIndex, exponentIndex)
-                   && IsValidFraction(input, dotIndex, exponentIndex)
+                   && Fraction(input, dotIndex, exponentIndex)
                    && IsValidExponent(input, exponentIndex);
         }
 
@@ -23,19 +23,19 @@ namespace Json
             return exponentIndex <= 1 || IsDigits(input[(exponentIndex + 1) ..]);
         }
 
-        private static bool IsValidFraction(string input, int dotIndex, int exponentIndex)
+        private static string Fraction(string input, int dotIndex, int exponentIndex)
         {
-            if (dotIndex > 0 && exponentIndex > 0 && dotIndex < exponentIndex)
+            if (dotIndex > 0 && exponentIndex < 0)
             {
-                return IsDigits(input[(dotIndex + 1) ..exponentIndex]);
+                return input[dotIndex..];
             }
-            else if (dotIndex > 0 && exponentIndex < 0)
+            else if (dotIndex > 0 && exponentIndex > 0)
             {
-                return IsDigits(input[(dotIndex + 1) ..]);
+                return input[dotIndex..exponentIndex];
             }
             else
             {
-                return true;
+                return "";
             }
         }
 
