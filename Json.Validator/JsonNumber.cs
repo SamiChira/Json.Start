@@ -50,8 +50,7 @@ namespace Json
 
         private static string Exponent(string input, int exponentIndex)
         {
-            return exponentIndex > 0 ? input[exponentIndex ..]
-                    : exponentIndex.ToString();
+            return exponentIndex > 0 ? input[exponentIndex ..] : "";
         }
 
         private static string Fraction(string input, int dotIndex, int exponentIndex)
