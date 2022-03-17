@@ -20,17 +20,16 @@ namespace Json
 
         private static bool IsValidExponent(string exponent)
         {
-            int plusOrMinusIndex = exponent.IndexOfAny(new[] { '+', '-' });
-            if (exponent != "-1" && plusOrMinusIndex > 0)
+            if (exponent.Length > 1 && StartWithPlusOrMinus(exponent[1..]))
             {
-                return IsDigits(exponent[(plusOrMinusIndex + 1) ..]) && exponent[plusOrMinusIndex..].Length > 1;
+                return IsDigits(exponent[(exponent.IndexOfAny(new[] { '+', '-' }) + 1) ..]);
             }
-            else if (exponent != "-1")
+            else if (exponent.Length > 1)
             {
-                return IsDigits(exponent[1..]) && exponent.Length > 1;
+                return IsDigits(exponent[1..]) && !exponent.ToLower().EndsWith('e');
             }
 
-            return exponent == "-1";
+            return exponent.Length > 0 ? IsDigits(exponent) : string.IsNullOrEmpty(exponent);
         }
 
         private static bool IsValidFraction(string fraction)
