@@ -22,12 +22,10 @@ namespace Json
         {
             if (exponent.Length > 1 && StartWithPlusOrMinus(exponent[1..]))
             {
-                return IsDigits(exponent[(exponent.IndexOfAny(new[] { '+', '-' }) + 1) ..]);
+                exponent = exponent[1..];
             }
 
-            return exponent.Length > 1 ?
-                    IsDigits(exponent[1..]) && !exponent.ToLower().EndsWith('e')
-                    : string.IsNullOrEmpty(exponent);
+            return exponent.Length == 0 || IsDigits(exponent[1..]);
         }
 
         private static bool IsValidFraction(string fraction)
