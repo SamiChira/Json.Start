@@ -50,16 +50,12 @@ namespace Json
 
         private static string Fraction(string input, int dotIndex, int exponentIndex)
         {
-            if (dotIndex > 0 && exponentIndex < 0)
-            {
-                return input[dotIndex..];
-            }
-            else if (dotIndex > 0 && exponentIndex > 0)
+            if (dotIndex > 0 && exponentIndex > 0)
             {
                 return input[dotIndex..exponentIndex];
             }
 
-            return "";
+            return dotIndex > 0 ? input[dotIndex..] : "";
         }
 
         private static string Integer(string input, int dotIndex, int exponentIndex)
