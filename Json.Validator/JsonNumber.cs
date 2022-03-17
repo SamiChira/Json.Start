@@ -40,9 +40,9 @@ namespace Json
 
         private static bool IsValidInteger(string integer)
         {
-            if (StartWithPlusOrMinus(integer))
+            if (integer.StartsWith('-'))
             {
-                return IsDigits(integer[1..]) && !StartsWithZero(integer);
+                integer = integer[1..];
             }
 
             return IsDigits(integer) && !StartsWithZero(integer);
