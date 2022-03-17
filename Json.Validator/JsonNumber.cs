@@ -35,7 +35,7 @@ namespace Json
 
         private static bool IsValidFraction(string fraction)
         {
-            return fraction.Length > 1 ? IsDigits(fraction[1..]) : IsDigits(fraction);
+            return fraction.Length > 1 ? IsDigits(fraction[1..]) : string.IsNullOrEmpty(fraction);
         }
 
         private static bool IsValidInteger(string integer)
