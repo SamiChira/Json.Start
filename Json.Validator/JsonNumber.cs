@@ -37,12 +37,7 @@ namespace Json
 
         private static bool IsValidInteger(string integer)
         {
-            if (integer.StartsWith('-'))
-            {
-                integer = integer[1..];
-            }
-
-            return IsDigits(integer) && !StartsWithZero(integer);
+            return integer.StartsWith('-') ? IsDigits(integer[1 ..]) : IsDigits(integer) && !StartsWithZero(integer);
         }
 
         private static string Exponent(string input, int exponentIndex)
