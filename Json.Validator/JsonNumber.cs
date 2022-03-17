@@ -64,10 +64,8 @@ namespace Json
             {
                 return input[dotIndex..exponentIndex];
             }
-            else
-            {
-                return "";
-            }
+
+            return "";
         }
 
         private static string Integer(string input, int dotIndex, int exponentIndex)
