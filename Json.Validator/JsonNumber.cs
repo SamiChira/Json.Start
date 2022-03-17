@@ -14,8 +14,13 @@ namespace Json
             int dotIndex = input.IndexOf('.');
             int exponentIndex = input.IndexOfAny(new[] { 'e', 'E' });
             return IsValidInteger(Integer(input, dotIndex, exponentIndex))
-                   && Fraction(input, dotIndex, exponentIndex)
+                   && IsValidFraction(Fraction(input, dotIndex, exponentIndex))
                    && Exponent(input, exponentIndex);
+        }
+
+        private static bool IsValidFraction(string fraction)
+        {
+            return fraction.Length > 1 ? IsDigits(fraction[1..]) : IsDigits(fraction);
         }
 
         private static bool IsValidInteger(string integer)
