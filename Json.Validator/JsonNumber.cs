@@ -13,7 +13,7 @@ namespace Json
 
             int dotIndex = input.IndexOf('.');
             int exponentIndex = input.IndexOfAny(new[] { 'e', 'E' });
-            return IsInteger(input, dotIndex, exponentIndex)
+            return Integer(input, dotIndex, exponentIndex)
                    && IsValidFraction(input, dotIndex, exponentIndex)
                    && IsValidExponent(input, exponentIndex);
         }
@@ -39,22 +39,22 @@ namespace Json
             }
         }
 
-        private static bool IsInteger(string input, int dotIndex, int exponentIndex)
+        private static string Integer(string input, int dotIndex, int exponentIndex)
         {
-            if (dotIndex > 0 && exponentIndex > 0)
+            if (dotIndex > 0 && exponentIndex > 0 && dotIndex < exponentIndex)
             {
-                return IsDigits(input[..dotIndex]);
+                return input[..dotIndex];
             }
             else if (dotIndex > 0 && exponentIndex < 0)
             {
-                return IsDigits(input[..dotIndex]) && !StartsWithZero(input[..dotIndex]);
+                return input[..dotIndex];
             }
             else if (exponentIndex > 0 && dotIndex < 0)
             {
-                return IsDigits(input[..exponentIndex]) && !StartsWithZero(input[..exponentIndex]);
+                return input[..exponentIndex];
             }
 
-            return IsDigits(input) && !StartsWithZero(input);
+            return input;
         }
 
         static bool IsDigits(string input)
