@@ -15,7 +15,22 @@ namespace Json
             int exponentIndex = input.IndexOfAny(new[] { 'e', 'E' });
             return IsValidInteger(Integer(input, dotIndex, exponentIndex))
                    && IsValidFraction(Fraction(input, dotIndex, exponentIndex))
-                   && Exponent(input, exponentIndex);
+                   && IsValidExponent(Exponent(input, exponentIndex));
+        }
+
+        private static bool IsValidExponent(string exponent)
+        {
+            int plusOrMinusIndex = exponent.IndexOfAny(new[] { '+', '-' });
+            if (exponent != "-1" && plusOrMinusIndex > 0)
+            {
+                return IsDigits(exponent[(plusOrMinusIndex + 1) ..]) && exponent[plusOrMinusIndex..].Length > 1;
+            }
+            else if (exponent != "-1")
+            {
+                return IsDigits(exponent[1..]) && exponent.Length > 1;
+            }
+
+            return exponent == "-1";
         }
 
         private static bool IsValidFraction(string fraction)
