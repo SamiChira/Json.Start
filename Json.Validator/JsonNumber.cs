@@ -93,12 +93,12 @@ namespace Json
             foreach (var item in input)
             {
                 if (item < '0' || item > '9')
-                    {
-                        return false;
-                    }
+                {
+                    return false;
+                }
             }
 
-            return true;
+            return input.Length > 0;
         }
 
         private static bool StartWithPlusOrMinus(string input)
