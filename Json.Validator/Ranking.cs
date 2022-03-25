@@ -5,7 +5,7 @@ namespace SoccerRanking
 {
     public class Ranking
     {
-        private List<Team> teams;
+        private readonly List<Team> teams;
 
         public Ranking(List<Team> teams)
         {
@@ -30,7 +30,7 @@ namespace SoccerRanking
             {
                 if (teams[i].EqualsTeamName(teamName))
                 {
-                    return string.Format("Team {0} points and is on the {1} place.", teams[i].TeamStats(), (i + 1));
+                    return string.Format("Team {0} points and is on the {1} place.", teams[i].TeamStats(), i + 1);
                 }
             }
 
@@ -45,17 +45,6 @@ namespace SoccerRanking
             }
 
             return string.Format("Team {0} points and is on the {1} place.", teams[teamIndex - 1].TeamStats(), teamIndex);
-        }
-
-        private void TeamStatsUpdateByName(string teamName, int awardedPoints)
-        {
-            for (int i = 0; i < teams.Count; i++)
-            {
-                if (teams[i].EqualsTeamName(teamName))
-                {
-                    teams[i].TeamStatsUpdate(awardedPoints);
-                }
-            }
         }
 
         public void Match(string firstTeamName, int firstTeamFinalScore, string secondTeamName, int secondTeamFinalScore)
@@ -78,12 +67,25 @@ namespace SoccerRanking
             SortTeams(teams);
         }
 
+        private void TeamStatsUpdateByName(string teamName, int awardedPoints)
+        {
+            for (int i = 0; i < teams.Count; i++)
+            {
+                if (teams[i].EqualsTeamName(teamName))
+                {
+                    teams[i].TeamStatsUpdate(awardedPoints);
+                }
+            }
+        }
+
         private void SortTeams(List<Team> teams)
         {
-            if (teams.Count > 1)
+            if (teams.Count <= 1)
             {
-                BubbleSort(teams);
+                return;
             }
+
+            BubbleSort(teams);
         }
 
         private void BubbleSort(List<Team> teams)
@@ -94,7 +96,8 @@ namespace SoccerRanking
                 unnorderedRanking = 0;
                 for (int i = 1; i < teams.Count; i++)
                 {
-                    if (Convert.ToInt32(teams[i].TeamStats()[teams[i].TeamStats().LastIndexOf(' ')..]) > Convert.ToInt32(teams[i - 1].TeamStats()[teams[i - 1].TeamStats().LastIndexOf(' ')..]))
+                    if (Convert.ToInt32(teams[i].TeamStats()[teams[i].TeamStats().LastIndexOf(' ') ..])
+                        > Convert.ToInt32(teams[i - 1].TeamStats()[teams[i - 1].TeamStats().LastIndexOf(' ') ..]))
                     {
                         Swap(teams, i, i - 1);
                         unnorderedRanking++;
