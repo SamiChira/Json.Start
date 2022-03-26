@@ -86,7 +86,7 @@ namespace SoccerRanking.Facts
         }
 
         [Fact]
-        public void WhenANewMatchTakesPlaceAndWinnerTeamHaveMorePointsWinnerShouldBeAddeThreePoints()
+        public void WhenANewMatchTakesPlaceAndWinnerTeamHaveMorePointsWinnerShouldBeAddedThreePoints()
         {
             List<Team> teams = new List<Team>();
             Ranking rank = new Ranking(teams);
@@ -100,7 +100,7 @@ namespace SoccerRanking.Facts
         }
 
         [Fact]
-        public void WhenANewMatchTakesPlaceAndRankingHasMoreThanTwoTeamsWinnerTeamShouldBeAddeThreePointsAndRankingShoulBeOrdered()
+        public void WhenANewMatchTakesPlaceAndRankingHasMoreThanTwoTeamsWinnerTeamShouldBeAddedThreePointsAndRankingShoulBeOrdered()
         {
             List<Team> teams = new List<Team>();
             Ranking rank = new Ranking(teams);
