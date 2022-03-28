@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <CodeAnalysisRuleSet>juniormind.ruleset</CodeAnalysisRuleSet>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
