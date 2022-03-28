@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Json", "Json.Validator\Json
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Json.Facts", "Json.Facts\Json.Facts.csproj", "{6229320D-ADEC-41E1-8474-74710774B871}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ranking.Facts", "Ranking\Ranking.Facts.csproj", "{231A17EB-15BB-43BE-A388-54D022839ED1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ranking", "Ranking\Ranking.csproj", "{2AE0DB99-2A83-422D-BD97-8B90E113D97D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{6229320D-ADEC-41E1-8474-74710774B871}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6229320D-ADEC-41E1-8474-74710774B871}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6229320D-ADEC-41E1-8474-74710774B871}.Release|Any CPU.Build.0 = Release|Any CPU
-		{231A17EB-15BB-43BE-A388-54D022839ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{231A17EB-15BB-43BE-A388-54D022839ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{231A17EB-15BB-43BE-A388-54D022839ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{231A17EB-15BB-43BE-A388-54D022839ED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE0DB99-2A83-422D-BD97-8B90E113D97D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE0DB99-2A83-422D-BD97-8B90E113D97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE0DB99-2A83-422D-BD97-8B90E113D97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE0DB99-2A83-422D-BD97-8B90E113D97D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
