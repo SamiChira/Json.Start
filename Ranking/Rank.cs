@@ -12,7 +12,7 @@ namespace Ranking
             this.teams = teams;
         }
 
-        public void AddTeam(Team team)
+        public void Add(Team team)
         {
             Array.Resize(ref teams, teams.Length + 1);
             teams[^1] = team;
