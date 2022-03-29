@@ -7,113 +7,143 @@ namespace Ranking.Facts
     public class RankingFacts
     {
         [Fact]
-        public void WhenNewTeamIsAddedToRankShouldReturnUpdatedRanking()
+        public void WhenNewTeamIsAddedToRankAndRankIsEmptyShouldReturnUpdatedRanking()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
+            Team steaua = new Team("steaua", 1);
 
-            rank.AddTeam("steaua", 1);
+            rank.Add(steaua);
 
-            Assert.True(teams.Count == 1);
+            Assert.True(rank.PositionOf(steaua) == 1);
         }
 
         [Fact]
-        public void WhenRankingHasNoTeamsAndTeamStatsByNameIsCalledReturnsNull()
+        public void WhenNewTeamIsAddedToRankAndRanksAlreadyHasATeamShouldReturnUpdatedRanking()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
+            Team steaua = new Team("steaua", 1);
+            Team cfr = new Team("cfr", 1);
 
-            Assert.Null(rank.TeamStatsByName("cfr"));
+            rank.Add(steaua);
+            rank.Add(cfr);
+
+            Assert.True(rank.PositionOf(steaua) == 1);
+            Assert.True(rank.PositionOf(cfr) == 2);
         }
 
         [Fact]
-        public void WhenRankingHasTeamsAndTeamStatsByNameIsCalledReturnsTeamStats()
+        public void WhenRankingHasNoTeamsAndTeamStatsByNameIsCalledReturnsZero()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
+            Team cfr = new Team("cfr", 1);
 
-            rank.AddTeam("cfr", 1);
-
-            Assert.Equal("Team cfr : 1 points and is on the 1 place.", rank.TeamStatsByName("cfr"));
+            Assert.Equal(0, rank.PositionOf(cfr));
         }
 
         [Fact]
-        public void WhenRankingHasTeamsAndTeamStatsByIndexIsCalledReturnsTeamStats()
+        public void WhenRankingHasTeamsAndPositionOfIsCalledReturnsTeamPosition()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
+            Team cfr = new("cfr", 1);
 
-            rank.AddTeam("cfr", 1);
-            rank.AddTeam("steaua", 2);
+            rank.Add(cfr);
 
-            Assert.Equal("Team steaua : 2 points and is on the 1 place.", rank.TeamStatsByIndex(1));
+            Assert.Equal(1, rank.PositionOf(cfr));
         }
 
         [Fact]
-        public void WhenRankingHasNoTeamsAndTeamStatsByIndexIsCalledReturnsNull()
+        public void WhenRankingHasTeamsAndTeamAtIndexIsCalledReturnsTeamAtIndex()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
+            Ranking rank = new Ranking(teams);
+            Team cfr = new Team("cfr", 1);
+            Team steaua = new Team("steaua", 2);
+
+            rank.Add(cfr);
+            rank.Add(steaua);
+
+            Assert.Equal(steaua, rank.AtIndex(1));
+        }
+
+        [Fact]
+        public void WhenRankingHasNoTeamsAndAtIndexIsCalledReturnsNull()
+        {
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
 
-            Assert.Null(rank.TeamStatsByIndex(1));
+            Assert.Null(rank.AtIndex(1));
         }
 
         [Fact]
         public void WhenANewMatchTakesPlaceAndTeamsHaveSamePointsWinnerShouldBeOnAHigherRankPosition()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
-            rank.AddTeam("cfr", 0);
-            rank.AddTeam("steaua", 0);
+            Team cfr = new("cfr", 0);
+            Team steaua = new("steaua", 0);
 
-            rank.Match("steaua", 1, "cfr", 0);
+            rank.Add(cfr);
+            rank.Add(steaua);
+            rank.Update(steaua, 1, cfr, 0);
 
-            Assert.Equal("Team steaua : 3 points and is on the 1 place.", rank.TeamStatsByName("steaua"));
+            Assert.Equal(1, rank.PositionOf(steaua));
         }
 
         [Fact]
         public void WhenANewMatchTakesPlaceAndWinnerTeamHaveFewerPointsWinnerShouldBeAddedThreePoints()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
-            rank.AddTeam("cfr", 2);
-            rank.AddTeam("steaua", 0);
+            Team cfr = new("cfr", 2);
+            Team steaua = new("steaua", 0);
 
-            rank.Match("steaua", 1, "cfr", 0);
+            rank.Add(cfr);
+            rank.Add(steaua);
+            rank.Update(steaua, 1, cfr, 0);
 
-            Assert.Equal("Team steaua : 3 points and is on the 1 place.", rank.TeamStatsByName("steaua"));
-            Assert.Equal("Team cfr : 2 points and is on the 2 place.", rank.TeamStatsByName("cfr"));
+            Assert.Equal(1, rank.PositionOf(steaua));
+            Assert.Equal(2, rank.PositionOf(cfr));
         }
 
         [Fact]
         public void WhenANewMatchTakesPlaceAndWinnerTeamHaveMorePointsWinnerShouldBeAddeThreePoints()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
-            rank.AddTeam("cfr", 0);
-            rank.AddTeam("steaua", 0);
+            Team cfr = new("cfr", 0);
+            Team steaua = new("steaua", 0);
 
-            rank.Match("steaua", 0, "cfr", 1);
+            rank.Add(cfr);
+            rank.Add(steaua);
+            rank.Update(steaua, 0, cfr, 1);
 
-            Assert.Equal("Team steaua : 0 points and is on the 2 place.", rank.TeamStatsByName("steaua"));
-            Assert.Equal("Team cfr : 3 points and is on the 1 place.", rank.TeamStatsByName("cfr"));
+            Assert.Equal(2, rank.PositionOf(steaua));
+            Assert.Equal(1, rank.PositionOf(cfr));
         }
 
         [Fact]
         public void WhenANewMatchTakesPlaceAndRankingHasMoreThanTwoTeamsWinnerTeamShouldBeAddeThreePointsAndRankingShoulBeOrdered()
         {
-            List<Team> teams = new List<Team>();
+            Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
-            rank.AddTeam("cfr", 0);
-            rank.AddTeam("steaua", 2);
-            rank.AddTeam("farul", 1);
-            rank.AddTeam("u", 4);
+            Team cfr = new("cfr", 0);
+            Team steaua = new("steaua", 2);
+            Team farul = new("farul", 1);
+            Team u = new("u", 4);
 
-            rank.Match("steaua", 0, "cfr", 1);
+            rank.Add(cfr);
+            rank.Add(steaua);
+            rank.Add(farul);
+            rank.Add(u);
+            rank.Update(steaua, 0, cfr, 1);
 
-            Assert.Equal("Team u : 4 points and is on the 1 place.", rank.TeamStatsByName("u"));
-            Assert.Equal("Team cfr : 3 points and is on the 2 place.", rank.TeamStatsByName("cfr"));
-            Assert.Equal("Team farul : 1 points and is on the 4 place.", rank.TeamStatsByName("farul"));
+            Assert.Equal(1, rank.PositionOf(u));
+            Assert.Equal(2, rank.PositionOf(cfr));
+            Assert.Equal(4, rank.PositionOf(farul));
         }
     }
 }
