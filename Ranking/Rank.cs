@@ -16,11 +16,11 @@ namespace Ranking
         {
             Array.Resize(ref teams, teams.Length + 1);
             teams[^1] = team;
+            BubbleSort(teams);
         }
 
         public int PositionOf(Team team)
         {
-            BubbleSort(teams);
             int teamPosition = 0;
             for (int i = 0; i < teams.Length; i++)
             {
@@ -34,7 +34,6 @@ namespace Ranking
         }
         public Team AtIndex(int teamIndex)
         {
-            BubbleSort(teams);
             if (teamIndex > teams.Length - 1 || teamIndex < 0)
             {
                 return null;
