@@ -32,15 +32,15 @@ namespace Ranking
 
             return teamPosition;
         }
-
-        public string TeamStatsByIndex(int teamIndex)
+        public Team AtIndex(int teamIndex)
         {
-            if (teams.Length == 0)
+            BubbleSort(teams);
+            if (teamIndex > teams.Length - 1 || teamIndex < 0)
             {
                 return null;
             }
 
-            return string.Format("Team {0} points and is on the {1} place.", teams[teamIndex - 1].TeamStats(), teamIndex);
+            return teams[teamIndex - 1];
         }
 
         private void TeamStatsUpdateByName(string teamName, int awardedPoints)
