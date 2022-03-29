@@ -14,10 +14,20 @@ namespace Ranking
             this.points = points;
         }
 
-
-        public bool EqualsTeamName(string teamName)
+        public void Win()
         {
-            return name.Equals(teamName);
+            const int pointsForWin = 3;
+            points += pointsForWin;
+        }
+
+        public void Draw()
+        {
+            points += 1;
+        }
+
+        public bool HasMorePoints(Team TeamToCheck)
+        {
+            return points > TeamToCheck.points;
         }
     }
 }
