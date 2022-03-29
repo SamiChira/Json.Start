@@ -5,38 +5,56 @@ namespace Ranking.Facts
     public class TeamFacts
     {
         [Fact]
-        public void TeamStatsReturnCorrectValueWhenOneIsEntered()
+        public void WhenWinIsCalledShouldAddThreePointsToTeamPoints()
         {
+            Team cfr = new Team("cfr", 0);
+            Team steaua = new Team("steaua", 0);
+
+            cfr.Win();
+
+            Assert.True(cfr.HasMorePoints(steaua));
+        }
+
+        [Fact]
+        public void WhenDrawIsCalledAndTeamThatCallsDrawMethodHasOnePointLessThanOtherTeamShouldAddOnePointToTeamPoints()
+        {
+            Team cfr = new Team("cfr", 0);
             Team steaua = new Team("steaua", 1);
 
-            Assert.True(steaua.TeamStats() == "steaua : 1");
+            cfr.Draw();
+
+            Assert.False(cfr.HasMorePoints(steaua));
         }
 
         [Fact]
-        public void WhenTeamStatsUpdateIsCalledShouldChangePointsValueIfValueIsGreaterThanZero()
+        public void WhenDrawIsCalledAndTeamsHaveSamePointsShouldAddOnePointToTeamWhoCallsMethod()
+        {
+            Team cfr = new Team("cfr", 1);
+            Team steaua = new Team("steaua", 1);
+
+            cfr.Draw();
+
+            Assert.True(cfr.HasMorePoints(steaua));
+        }
+
+
+
+        [Fact]
+        public void WhenHasMorePointsIsCalledShouldReturnFalseIfTeamEnteredHasLessOrTheSamePointsAsTheTeamToCompareWith()
         {
             Team steaua = new Team("steaua", 0);
-            int awardedPoints = 3;
+            Team cfr = new Team("cfr", 0);
 
-            steaua.TeamStatsUpdate(awardedPoints);
-
-            Assert.True(steaua.TeamStats() == "steaua : 3");
+            Assert.False(steaua.HasMorePoints(cfr));
         }
 
         [Fact]
-        public void WhenEqualsTeamNameIsCalledShouldReturnTrueIfTeamEnteredHasTheSameNameAsTheSearchedName()
+        public void WhenHasMorePointsIsCalledAndTeamEnteredHasMorePointsThanTheTeamToCompareWithShouldReturnTrue()
         {
-            Team steaua = new Team("steaua", 0);
+            Team steaua = new Team("steaua", 1);
+            Team cfr = new Team("cfr", 0);
 
-            Assert.True(steaua.EqualsTeamName("steaua"));
-        }
-
-        [Fact]
-        public void WhenEqualsTeamNameIsCalledShouldReturnFalseIfTeamEnteredHasNotTheSameNameAsTheSearchedName()
-        {
-            Team steaua = new Team("steaua", 0);
-
-            Assert.False(steaua.EqualsTeamName("cfr"));
+            Assert.True(steaua.HasMorePoints(cfr));
         }
     }
 }
