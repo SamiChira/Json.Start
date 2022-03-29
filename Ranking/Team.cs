@@ -15,11 +15,6 @@ namespace Ranking
         }
 
 
-        public void TeamStatsUpdate(int awardedPoints)
-        {
-            points += awardedPoints;
-        }
-
         public bool EqualsTeamName(string teamName)
         {
             return name.Equals(teamName);
