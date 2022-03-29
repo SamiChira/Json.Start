@@ -16,11 +16,11 @@ namespace Ranking
         {
             Array.Resize(ref teams, teams.Length + 1);
             teams[teams.Length - 1] = team;
+            BubbleSort(teams);
         }
 
         public int PositionOf(Team team)
         {
-            BubbleSort(teams);
             for (int i = 0; i < teams.Length; i++)
             {
                 if (teams[i] == team)
@@ -35,7 +35,6 @@ namespace Ranking
 
         public Team AtIndex(int teamIndex)
         {
-            BubbleSort(teams);
             if (teamIndex > teams.Length - 1 || teamIndex < 0)
             {
                 return null;
@@ -73,14 +72,19 @@ namespace Ranking
                 {
                     if (teams[i].hasMorePoints(teams[i - 1]))
                     {
-                        Team temp = teams[i];
-                        teams[i] = teams[i - 1];
-                        teams[i - 1] = temp;
+                        Swap(teams[i - 1], teams[i]);
                         unnorderedRanking++;
                     }
                 }
             }
             while (unnorderedRanking != 0);
+        }
+
+        public void Swap(Team firstTeam, Team secondTeam)
+        {
+            Team temp = firstTeam;
+            firstTeam = secondTeam;
+            secondTeam = temp;
         }
     }
 }
