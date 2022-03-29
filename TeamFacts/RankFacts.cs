@@ -15,7 +15,7 @@ namespace Ranking.Facts
 
             rank.Add(steaua);
 
-            Assert.True(rank.PositionOf(steaua) == 1);
+            Assert.True(rank.positionOf(steaua) == 1);
         }
 
         [Fact]
@@ -29,8 +29,8 @@ namespace Ranking.Facts
             rank.Add(steaua);
             rank.Add(cfr);
 
-            Assert.True(rank.PositionOf(steaua) == 1);
-            Assert.True(rank.PositionOf(cfr) == 2);
+            Assert.True(rank.positionOf(steaua) == 1);
+            Assert.True(rank.positionOf(cfr) == 2);
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace Ranking.Facts
             Ranking rank = new Ranking(teams);
             Team cfr = new Team("cfr", 1);
 
-            Assert.Equal(0, rank.PositionOf(cfr));
+            Assert.Equal(0, rank.positionOf(cfr));
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace Ranking.Facts
 
             rank.Add(cfr);
 
-            Assert.Equal(1, rank.PositionOf(cfr));
+            Assert.Equal(1, rank.positionOf(cfr));
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace Ranking.Facts
             rank.Add(cfr);
             rank.Add(steaua);
 
-            Assert.Equal(steaua, rank.AtIndex(1));
+            Assert.Equal(steaua, rank.atIndex(1));
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace Ranking.Facts
             Team[] teams = new Team[] { };
             Ranking rank = new Ranking(teams);
 
-            Assert.Null(rank.AtIndex(1));
+            Assert.Null(rank.atIndex(1));
         }
 
         [Fact]
@@ -90,7 +90,7 @@ namespace Ranking.Facts
             rank.Add(steaua);
             rank.Update(steaua, 1, cfr, 0);
 
-            Assert.Equal(1, rank.PositionOf(steaua));
+            Assert.Equal(1, rank.positionOf(steaua));
         }
 
         [Fact]
@@ -105,8 +105,8 @@ namespace Ranking.Facts
             rank.Add(steaua);
             rank.Update(steaua, 1, cfr, 0);
 
-            Assert.Equal(1, rank.PositionOf(steaua));
-            Assert.Equal(2, rank.PositionOf(cfr));
+            Assert.Equal(1, rank.positionOf(steaua));
+            Assert.Equal(2, rank.positionOf(cfr));
         }
 
         [Fact]
@@ -121,8 +121,8 @@ namespace Ranking.Facts
             rank.Add(steaua);
             rank.Update(steaua, 0, cfr, 1);
 
-            Assert.Equal(2, rank.PositionOf(steaua));
-            Assert.Equal(1, rank.PositionOf(cfr));
+            Assert.Equal(2, rank.positionOf(steaua));
+            Assert.Equal(1, rank.positionOf(cfr));
         }
 
         [Fact]
@@ -141,9 +141,9 @@ namespace Ranking.Facts
             rank.Add(u);
             rank.Update(steaua, 0, cfr, 1);
 
-            Assert.Equal(1, rank.PositionOf(u));
-            Assert.Equal(2, rank.PositionOf(cfr));
-            Assert.Equal(4, rank.PositionOf(farul));
+            Assert.Equal(1, rank.positionOf(u));
+            Assert.Equal(2, rank.positionOf(cfr));
+            Assert.Equal(4, rank.positionOf(farul));
         }
     }
 }

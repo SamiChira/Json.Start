@@ -18,9 +18,9 @@ namespace Ranking
             teams[teams.Length - 1] = team;
         }
 
-        public int PositionOf(Team team)
+        public int positionOf(Team team)
         {
-            BubbleSort(teams);
+            bubbleSort(teams);
             for (int i = 0; i < teams.Length; i++)
             {
                 if (teams[i] == team)
@@ -33,9 +33,9 @@ namespace Ranking
             return 0;
         }
 
-        public Team AtIndex(int teamIndex)
+        public Team atIndex(int teamIndex)
         {
-            BubbleSort(teams);
+            bubbleSort(teams);
             if (teamIndex > teams.Length - 1 || teamIndex < 0)
             {
                 return null;
@@ -60,10 +60,10 @@ namespace Ranking
                 awayTeam.Win();
             }
 
-            BubbleSort(teams);
+            bubbleSort(teams);
         }
 
-        private void BubbleSort(Team[] teams)
+        private void bubbleSort(Team[] teams)
         {
             int unnorderedRanking;
             do
