@@ -5,28 +5,28 @@ namespace Ranking
 {
     public class Ranking
     {
-        private List<Team> teams;
+        private Team[] teams;
 
-        public Ranking(List<Team> teams)
+        public Ranking(Team[] teams)
         {
             this.teams = teams;
         }
 
-        public void AddTeam(string teamName, int teamPoints)
+        public void AddTeam(Team team)
         {
-            var newTeam = new Team(teamName, teamPoints);
-            teams.Add(newTeam);
-            SortTeams(teams);
+            Array.Resize(ref teams, teams.Length + 1);
+            teams[^1] = team;
+            BubbleSort(teams);
         }
 
         public string TeamStatsByName(string teamName)
         {
-            if (teams.Count == 0)
+            if (teams.Length == 0)
             {
                 return null;
             }
 
-            for (int i = 0; i < teams.Count; i++)
+            for (int i = 0; i < teams.Length; i++)
             {
                 if (teams[i].EqualsTeamName(teamName))
                 {
@@ -39,7 +39,7 @@ namespace Ranking
 
         public string TeamStatsByIndex(int teamIndex)
         {
-            if (teams.Count == 0)
+            if (teams.Length == 0)
             {
                 return null;
             }
@@ -49,7 +49,7 @@ namespace Ranking
 
         private void TeamStatsUpdateByName(string teamName, int awardedPoints)
         {
-            for (int i = 0; i < teams.Count; i++)
+            for (int i = 0; i < teams.Length; i++)
             {
                 if (teams[i].EqualsTeamName(teamName))
                 {
@@ -75,24 +75,16 @@ namespace Ranking
                 TeamStatsUpdateByName(secondTeamName, pointsForWin);
             }
 
-            SortTeams(teams);
+            BubbleSort(teams);
         }
 
-        private void SortTeams(List<Team> teams)
-        {
-            if (teams.Count > 1)
-            {
-                BubbleSort(teams);
-            }
-        }
-
-        private void BubbleSort(List<Team> teams)
+        private void BubbleSort(Team[] teams)
         {
             int unnorderedRanking;
             do
             {
                 unnorderedRanking = 0;
-                for (int i = 1; i < teams.Count; i++)
+                for (int i = 1; i < teams.Length; i++)
                 {
                     if (Convert.ToInt32(teams[i].TeamStats()[teams[i].TeamStats().LastIndexOf(' ')..]) > Convert.ToInt32(teams[i - 1].TeamStats()[teams[i - 1].TeamStats().LastIndexOf(' ')..]))
                     {
@@ -104,7 +96,7 @@ namespace Ranking
             while (unnorderedRanking != 0);
         }
 
-        private void Swap(List<Team> teams, int firstIndex, int secondIndex)
+        private void Swap(Team[] teams, int firstIndex, int secondIndex)
         {
             (int minIndex, int maxIndex) = GetMinMaxIndex(firstIndex, secondIndex);
 
