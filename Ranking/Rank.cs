@@ -90,12 +90,7 @@ namespace Ranking
 
         private (int minIndex, int maxIndex) GetMinMaxIndex(int firstIndex, int secondIndex)
         {
-            if (firstIndex > secondIndex)
-            {
-                return (secondIndex, firstIndex);
-            }
-
-            return (firstIndex, secondIndex);
+            return firstIndex > secondIndex ? (secondIndex, firstIndex) : (firstIndex, secondIndex);
         }
     }
 }
