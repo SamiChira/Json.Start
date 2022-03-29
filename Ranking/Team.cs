@@ -14,10 +14,6 @@ namespace Ranking
             this.points = points;
         }
 
-        public string TeamStats()
-        {
-            return name + " : " + points.ToString();
-        }
 
         public void TeamStatsUpdate(int awardedPoints)
         {
