@@ -68,9 +68,9 @@ namespace Ranking
             do
             {
                 unnorderedRanking = 0;
-                for (int i = 1; i < teams.Length; i++)
+                for (int i = 1; i <= teams.Length - 1; i++)
                 {
-                    if (Convert.ToInt32(teams[i].TeamStats()[teams[i].TeamStats().LastIndexOf(' ')..]) > Convert.ToInt32(teams[i - 1].TeamStats()[teams[i - 1].TeamStats().LastIndexOf(' ')..]))
+                    if (teams[i].HasMorePoints(teams[i - 1]))
                     {
                         Swap(teams, i, i - 1);
                         unnorderedRanking++;
