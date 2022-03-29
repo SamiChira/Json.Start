@@ -15,25 +15,27 @@ namespace Ranking
         public void Add(Team team)
         {
             Array.Resize(ref teams, teams.Length + 1);
-            teams[^1] = team;
-            BubbleSort(teams);
+            teams[teams.Length - 1] = team;
         }
 
         public int PositionOf(Team team)
         {
-            int teamPosition = 0;
+            BubbleSort(teams);
             for (int i = 0; i < teams.Length; i++)
             {
                 if (teams[i] == team)
                 {
-                    teamPosition = i + 1;
+                    return i + 1;
+
                 }
             }
 
-            return teamPosition;
+            return 0;
         }
+
         public Team AtIndex(int teamIndex)
         {
+            BubbleSort(teams);
             if (teamIndex > teams.Length - 1 || teamIndex < 0)
             {
                 return null;
@@ -69,28 +71,16 @@ namespace Ranking
                 unnorderedRanking = 0;
                 for (int i = 1; i <= teams.Length - 1; i++)
                 {
-                    if (teams[i].HasMorePoints(teams[i - 1]))
+                    if (teams[i].hasMorePoints(teams[i - 1]))
                     {
-                        Swap(teams, i, i - 1);
+                        Team temp = teams[i];
+                        teams[i] = teams[i - 1];
+                        teams[i - 1] = temp;
                         unnorderedRanking++;
                     }
                 }
             }
             while (unnorderedRanking != 0);
-        }
-
-        private void Swap(Team[] teams, int firstIndex, int secondIndex)
-        {
-            (int minIndex, int maxIndex) = GetMinMaxIndex(firstIndex, secondIndex);
-
-            Team temp = teams[minIndex];
-            teams[minIndex] = teams[maxIndex];
-            teams[maxIndex] = temp;
-        }
-
-        private (int minIndex, int maxIndex) GetMinMaxIndex(int firstIndex, int secondIndex)
-        {
-            return firstIndex > secondIndex ? (secondIndex, firstIndex) : (firstIndex, secondIndex);
         }
     }
 }

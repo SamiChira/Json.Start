@@ -12,7 +12,7 @@ namespace Ranking.Facts
 
             cfr.Win();
 
-            Assert.True(cfr.HasMorePoints(steaua));
+            Assert.True(cfr.hasMorePoints(steaua));
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace Ranking.Facts
 
             cfr.Draw();
 
-            Assert.False(cfr.HasMorePoints(steaua));
+            Assert.False(cfr.hasMorePoints(steaua));
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace Ranking.Facts
 
             cfr.Draw();
 
-            Assert.True(cfr.HasMorePoints(steaua));
+            Assert.True(cfr.hasMorePoints(steaua));
         }
 
 
@@ -45,7 +45,7 @@ namespace Ranking.Facts
             Team steaua = new Team("steaua", 0);
             Team cfr = new Team("cfr", 0);
 
-            Assert.False(steaua.HasMorePoints(cfr));
+            Assert.False(steaua.hasMorePoints(cfr));
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace Ranking.Facts
             Team steaua = new Team("steaua", 1);
             Team cfr = new Team("cfr", 0);
 
-            Assert.True(steaua.HasMorePoints(cfr));
+            Assert.True(steaua.hasMorePoints(cfr));
         }
     }
 }

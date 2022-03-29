@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Json", "Json.Validator\Json
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Json.Facts", "Json.Facts\Json.Facts.csproj", "{6229320D-ADEC-41E1-8474-74710774B871}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ranking", "Ranking\Ranking.csproj", "{2AE0DB99-2A83-422D-BD97-8B90E113D97D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ranking", "Ranking\Ranking.csproj", "{2AE0DB99-2A83-422D-BD97-8B90E113D97D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Team.Facts", "TeamFacts\Team.Facts.csproj", "{853C72AE-EF08-45E0-AF80-CECAE68DC831}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ranking.Facts", "TeamFacts\Ranking.Facts.csproj", "{853C72AE-EF08-45E0-AF80-CECAE68DC831}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -25,7 +25,7 @@ namespace Ranking
             points += 1;
         }
 
-        public bool HasMorePoints(Team TeamToCheck)
+        public bool hasMorePoints(Team TeamToCheck)
         {
             return points > TeamToCheck.points;
         }
