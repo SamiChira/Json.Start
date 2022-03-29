@@ -16,25 +16,21 @@ namespace Ranking
         {
             Array.Resize(ref teams, teams.Length + 1);
             teams[^1] = team;
-            BubbleSort(teams);
         }
 
-        public string TeamStatsByName(string teamName)
+        public int PositionOf(Team team)
         {
-            if (teams.Length == 0)
-            {
-                return null;
-            }
-
+            BubbleSort(teams);
+            int teamPosition = 0;
             for (int i = 0; i < teams.Length; i++)
             {
-                if (teams[i].EqualsTeamName(teamName))
+                if (teams[i] == team)
                 {
-                    return string.Format("Team {0} points and is on the {1} place.", teams[i].TeamStats(), (i + 1));
+                    teamPosition = i + 1;
                 }
             }
 
-            return "";
+            return teamPosition;
         }
 
         public string TeamStatsByIndex(int teamIndex)
