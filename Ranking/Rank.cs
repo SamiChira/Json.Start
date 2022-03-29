@@ -43,32 +43,20 @@ namespace Ranking
             return teams[teamIndex - 1];
         }
 
-        private void TeamStatsUpdateByName(string teamName, int awardedPoints)
+        public void Update(Team homeTeam, int homeTeamScore, Team awayTeam, int awayTeamScore)
         {
-            for (int i = 0; i < teams.Length; i++)
+            if (homeTeamScore == awayTeamScore)
             {
-                if (teams[i].EqualsTeamName(teamName))
-                {
-                    teams[i].TeamStatsUpdate(awardedPoints);
-                }
+                homeTeam.Draw();
+                awayTeam.Draw();
             }
-        }
-
-        public void Match(string firstTeamName, int firstTeamFinalScore, string secondTeamName, int secondTeamFinalScore)
-        {
-            const int pointsForWin = 3;
-            if (firstTeamFinalScore == secondTeamFinalScore)
+            else if (homeTeamScore > awayTeamScore)
             {
-                TeamStatsUpdateByName(firstTeamName, 1);
-                TeamStatsUpdateByName(secondTeamName, 1);
-            }
-            else if (firstTeamFinalScore > secondTeamFinalScore)
-            {
-                TeamStatsUpdateByName(firstTeamName, pointsForWin);
+                homeTeam.Win();
             }
             else
             {
-                TeamStatsUpdateByName(secondTeamName, pointsForWin);
+                awayTeam.Win();
             }
 
             BubbleSort(teams);
