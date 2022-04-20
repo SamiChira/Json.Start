@@ -72,7 +72,7 @@ namespace Ranking
                 {
                     if (teams[i].hasMorePoints(teams[i - 1]))
                     {
-                        Swap(i,teams[i], teams[i - 1]);
+                        Swap(i);
                         unnorderedRanking++;
                     }
                 }
@@ -80,10 +80,10 @@ namespace Ranking
             while (unnorderedRanking != 0);
         }
 
-        public void Swap(int indexOfI, Team firstTeam, Team secondTeam)
+        public void Swap(int indexOfI)
         {
-            Team temp = firstTeam;
-            teams[indexOfI] = secondTeam;
+            Team temp = teams[indexOfI];
+            teams[indexOfI] = teams[indexOfI - 1];
             teams[indexOfI - 1] = temp;
         }
     }
