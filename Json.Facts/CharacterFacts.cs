@@ -51,22 +51,6 @@ namespace Json.Facts
             Assert.True(letterA.Match('a', 'z'));
         }
 
-        [Fact]
-        public void WhenMatchUnicodeIsCalledAndInputIsNullShouldReturnFalse()
-        {
-            Character character = new Character('a');
-
-            Assert.False(character.MatchUnicode(null));
-        }
-
-        [Fact]
-        public void WhenMatchUnicodeIsCalledAndInputedUnicodeIsValidUnicodeReturnsTrue()
-        {
-            Character character = new Character('a');
-
-            Assert.True(character.MatchUnicode("\\u1234"));
-        }
-
         /*
         [Fact]
         public void ()
