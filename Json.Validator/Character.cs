@@ -20,7 +20,5 @@ namespace Json
 
             return text[0] == pattern;
         }
-
-        public bool Match(char start, char end) => start <= pattern && pattern <= end;
     }
 }

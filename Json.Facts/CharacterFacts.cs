@@ -30,32 +30,5 @@ namespace Json.Facts
             Assert.True(character.Match("a"));
             Assert.True(character.Match("abc"));
         }
-
-        [Fact]
-        public void WhenOverloadMatchIsCalledAndInputIsNotInGivenLimitsShouldReturnFalse()
-        {
-            Character digitOne = new Character('1');
-            Character letterA = new Character('a');
-
-            Assert.False(digitOne.Match('2', '9'));
-            Assert.False(letterA.Match('b', 'z'));
-        }
-
-        [Fact]
-        public void WhenOverloadMatchIsCalledAndInputIsInGivenLimitsShouldReturnTrue()
-        {
-            Character digitOne = new Character('1');
-            Character letterA = new Character('a');
-
-            Assert.True(digitOne.Match('1', '9'));
-            Assert.True(letterA.Match('a', 'z'));
-        }
-
-        /*
-        [Fact]
-        public void ()
-        {
-
-        }*/
     }
 }
