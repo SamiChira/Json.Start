@@ -62,14 +62,16 @@ namespace Json.Facts
         [Fact]
         public void WhenMatchUnicodeIsCalledAndInputedUnicodeIsValidUnicodeReturnsTrue()
         {
-            
+            Character character = new Character('a');
+
+            Assert.True(character.MatchUnicode("\\u1234"));
         }
 
-    /*
-    [Fact]
-    public void ()
-    {
+        /*
+        [Fact]
+        public void ()
+        {
 
-    }*/
-}
+        }*/
+    }
 }
