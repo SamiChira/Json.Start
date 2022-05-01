@@ -13,11 +13,7 @@
         {
             foreach (var choice in patterns)
             {
-                if (choice.GetType() == typeof(Range) && choice.Match(text))
-                {
-                    return true;
-                }
-                else if (choice.GetType() == typeof(Character) && choice.Match(text))
+                if (choice.Match(text))
                 {
                     return true;
                 }
