@@ -2,7 +2,12 @@
 
 namespace Json
 {
-    public class Character
+    public interface IPattern
+    {
+        bool Match(string text);
+    }
+
+    public class Character : IPattern
     {
         readonly char pattern;
 
