@@ -11,15 +11,13 @@
 
         public bool Match(string text)
         {
-            foreach (var choice in patterns)
+            bool match = false;
+            foreach (var pattern in patterns)
             {
-                if (choice.Match(text))
-                {
-                    return true;
-                }
+                match = pattern.Match(text) || match;
             }
 
-            return false;
+            return match;
         }
     }
 }
