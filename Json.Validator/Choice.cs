@@ -16,16 +16,20 @@
                 return false;
             }
 
-            bool[] match = new bool[patterns.Length];
+            int counter = 0;
+
             for (int i = 0; i < patterns.Length; i++)
             {
-                foreach (var item in text)
+                for (int j = 0; j < text.Length; j++)
                 {
-                    match[i] = patterns[i].Match(item.ToString()) || match[i];
+                    if (patterns[i].Match(text[j].ToString()))
+                    {
+                        counter++;
+                    }
                 }
             }
 
-            return match[0] || match[1];
+            return counter == text.Length;
         }
     }
 }
