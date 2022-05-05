@@ -11,13 +11,21 @@
 
         public bool Match(string text)
         {
-            bool match = false;
-            foreach (var pattern in patterns)
+            if (string.IsNullOrEmpty(text))
             {
-                match = pattern.Match(text) || match;
+                return false;
             }
 
-            return match;
+            bool[] match = new bool[patterns.Length];
+            for (int i = 0; i < patterns.Length; i++)
+            {
+                foreach (var item in text)
+                {
+                    match[i] = patterns[i].Match(item.ToString()) || match[i];
+                }
+            }
+
+            return match[0] || match[1];
         }
     }
 }
