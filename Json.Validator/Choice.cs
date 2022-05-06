@@ -16,7 +16,7 @@
                 return false;
             }
 
-            int counter = 0;
+            byte counter = 0;
 
             for (int i = 0; i < patterns.Length; i++)
             {
