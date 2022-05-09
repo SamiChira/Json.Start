@@ -16,20 +16,36 @@
                 return false;
             }
 
-            byte counter = 0;
+            string digits = GetDigits(text, '0', '9');
+            string letters = GetLetters(text.ToLower(), 'a', 'z');
+            byte matchesCounter = 0;
 
             for (int i = 0; i < patterns.Length; i++)
             {
-                for (int j = 0; j < text.Length; j++)
+                if (patterns[i].Match(text) || (patterns[i].Match(digits) || patterns[i].Match(letters)))
                 {
-                    if (patterns[i].Match(text[j].ToString()))
-                    {
-                        counter++;
-                    }
+                    matchesCounter++;
                 }
             }
 
-            return counter == text.Length;
+            return digits.Length >= 1 && letters.Length >= 1 ? matchesCounter > 1 : matchesCounter > 0;
+        }
+
+        string GetLetters(string text, char start, char end) => GetDigits(text, start, end);
+
+        string GetDigits(string text, char start, char end)
+        {
+            string digits = "";
+
+            foreach (var item in text)
+            {
+                if (item >= start && item <= end)
+                {
+                    digits += item;
+                }
+            }
+
+            return digits;
         }
     }
 }
