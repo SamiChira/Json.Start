@@ -28,7 +28,7 @@
                 }
             }
 
-            return digits.Length >= 1 && letters.Length >= 1 ? matchesCounter > 1 : matchesCounter > 0;
+            return digits.Length > 0 && letters.Length > 0 ? matchesCounter > 1 : matchesCounter > 0;
         }
 
         string GetLetters(string text, char start, char end) => GetDigits(text, start, end);
