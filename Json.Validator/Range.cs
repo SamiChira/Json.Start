@@ -20,15 +20,7 @@ namespace Json
                 return false;
             }
 
-            foreach (var item in text)
-            {
-                if (item < start || item > end)
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return start <= text[0] && text[0] <= end;
         }
     }
 }

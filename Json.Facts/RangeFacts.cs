@@ -28,7 +28,7 @@ namespace Json.Facts
             var range = new Range('a', 'f');
 
             Assert.False(range.Match("1ab"));
-            Assert.False(range.Match("abg"));
+            Assert.False(range.Match("gba"));
         }
     }
 }
