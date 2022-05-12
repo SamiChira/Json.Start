@@ -11,22 +11,15 @@
 
         public bool Match(string text)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                return false;
-            }
-
-            bool patternsMatches = false;
-
             for (int i = 0; i < patterns.Length; i++)
             {
                 if (patterns[i].Match(text))
                 {
-                    patternsMatches = patterns[i].Match(text) || patternsMatches;
+                    return true;
                 }
             }
 
-            return patternsMatches;
+            return false;
         }
     }
 }
