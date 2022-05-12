@@ -66,8 +66,6 @@ namespace Json.Facts
                    new Range('a', 'f'),
                    new Range('A', 'F')));
 
-            Assert.False(hex.Match("ZA"));
-            Assert.False(hex.Match("za"));
             Assert.False(hex.Match("g8"));
             Assert.False(hex.Match("G8"));
             Assert.False(hex.Match(""));
