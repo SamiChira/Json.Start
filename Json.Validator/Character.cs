@@ -11,14 +11,11 @@ namespace Json
             this.pattern = pattern;
         }
 
-        public bool Match(string text)
+        public IMatch Match(string text)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                return false;
-            }
-
-            return text[0] == pattern;
+            return !string.IsNullOrEmpty(text) && text[0] == pattern ?
+                    new Match(text[1..], true) :
+                    new Match(text, false);
         }
     }
 }

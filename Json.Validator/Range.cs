@@ -13,14 +13,11 @@ namespace Json
             this.end = end;
         }
 
-        public bool Match(string text)
+        public IMatch Match(string text)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                return false;
-            }
-
-            return start <= text[0] && text[0] <= end;
+            return !string.IsNullOrEmpty(text) && start <= text[0] && text[0] <= end ?
+                    new Match(text[1 ..], true) :
+                    new Match(text, false);
         }
     }
 }
