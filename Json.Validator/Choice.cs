@@ -11,9 +11,9 @@
 
         public bool Match(string text)
         {
-            for (int i = 0; i < patterns.Length; i++)
+            foreach (var pattern in patterns)
             {
-                if (patterns[i].Match(text))
+                if (pattern.Match(text))
                 {
                     return true;
                 }
