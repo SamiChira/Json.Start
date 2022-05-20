@@ -22,14 +22,12 @@ namespace Json
 
             foreach (var pattern in patterns)
             {
-                if (pattern.Match(remainingText).Succes())
-                {
-                    remainingText = pattern.Match(remainingText).RemainingText();
-                }
-                else
+                if (!pattern.Match(remainingText).Succes())
                 {
                     return new Match(text, false);
                 }
+
+                remainingText = pattern.Match(remainingText).RemainingText();
             }
 
             return new Match(remainingText, true);
