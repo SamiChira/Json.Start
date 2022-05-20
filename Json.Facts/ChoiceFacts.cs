@@ -13,8 +13,8 @@ namespace Json.Facts
                 new Range('0', '9')
                 );
 
-            Assert.False(digit.Match(null));
-            Assert.False(digit.Match(""));
+            Assert.False(digit.Match(null).Succes());
+            Assert.False(digit.Match("").Succes());
         }
 
         [Fact]
@@ -24,9 +24,9 @@ namespace Json.Facts
                 new Character('0'),
                 new  Range('1' , '9'));
 
-            Assert.True(digit.Match("012"));
-            Assert.True(digit.Match("12"));
-            Assert.True(digit.Match("92"));
+            Assert.True(digit.Match("012").Succes());
+            Assert.True(digit.Match("12").Succes());
+            Assert.True(digit.Match("92").Succes());
         }
 
         [Fact]
@@ -36,9 +36,9 @@ namespace Json.Facts
                 new Character('0'),
                 new Range('1', '9'));
 
-            Assert.False(digit.Match("a9"));
-            Assert.False(digit.Match(""));
-            Assert.False(digit.Match(null));
+            Assert.False(digit.Match("a9").Succes());
+            Assert.False(digit.Match("").Succes());
+            Assert.False(digit.Match(null).Succes());
         }
 
         [Fact]
@@ -49,13 +49,13 @@ namespace Json.Facts
                    new Range('a', 'f'),
                    new Range('A', 'F')));
 
-            Assert.True(hex.Match("012"));
-            Assert.True(hex.Match("12"));
-            Assert.True(hex.Match("92"));
-            Assert.True(hex.Match("a9"));
-            Assert.True(hex.Match("f8"));
-            Assert.True(hex.Match("A9"));
-            Assert.True(hex.Match("F8"));
+            Assert.True(hex.Match("012").Succes());
+            Assert.True(hex.Match("12").Succes());
+            Assert.True(hex.Match("92").Succes());
+            Assert.True(hex.Match("a9").Succes());
+            Assert.True(hex.Match("f8").Succes());
+            Assert.True(hex.Match("A9").Succes());
+            Assert.True(hex.Match("F8").Succes());
         }
 
         [Fact]
@@ -66,10 +66,10 @@ namespace Json.Facts
                    new Range('a', 'f'),
                    new Range('A', 'F')));
 
-            Assert.False(hex.Match("g8"));
-            Assert.False(hex.Match("G8"));
-            Assert.False(hex.Match(""));
-            Assert.False(hex.Match(null));
+            Assert.False(hex.Match("g8").Succes());
+            Assert.False(hex.Match("G8").Succes());
+            Assert.False(hex.Match("").Succes());
+            Assert.False(hex.Match(null).Succes());
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Json.Facts
         {
             var range = new Range('a', 'z');
 
-            Assert.False(range.Match(null));
+            Assert.False(range.Match(null).Succes());
         }
 
         [Fact]
@@ -17,9 +17,9 @@ namespace Json.Facts
         {
             var range = new Range('a', 'f');
 
-            Assert.True(range.Match("abc"));
-            Assert.True(range.Match("fab"));
-            Assert.True(range.Match("bcd"));
+            Assert.True(range.Match("abc").Succes());
+            Assert.True(range.Match("fab").Succes());
+            Assert.True(range.Match("bcd").Succes());
         }
 
         [Fact]
@@ -27,8 +27,8 @@ namespace Json.Facts
         {
             var range = new Range('a', 'f');
 
-            Assert.False(range.Match("1ab"));
-            Assert.False(range.Match("gba"));
+            Assert.False(range.Match("1ab").Succes());
+            Assert.False(range.Match("gba").Succes());
         }
     }
 }
