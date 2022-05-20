@@ -10,7 +10,7 @@ namespace Json.Facts
         {
             Character character = new Character('a');
 
-            Assert.False(character.Match(null));
+            Assert.False(character.Match(null).Succes());
         }
 
         [Fact]
@@ -18,8 +18,8 @@ namespace Json.Facts
         {
             Character character = new Character('a');
 
-            Assert.False(character.Match("bac"));
-            Assert.False(character.Match("b"));
+            Assert.False(character.Match("bac").Succes());
+            Assert.False(character.Match("b").Succes());
         }
 
         [Fact]
@@ -27,8 +27,8 @@ namespace Json.Facts
         {
             Character character = new Character('a');
 
-            Assert.True(character.Match("a"));
-            Assert.True(character.Match("abc"));
+            Assert.True(character.Match("a").Succes());
+            Assert.True(character.Match("abc").Succes());
         }
     }
 }
