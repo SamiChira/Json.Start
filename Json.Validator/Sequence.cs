@@ -13,19 +13,19 @@ namespace Json
 
         public IMatch Match(string text)
         {
-            IMatch remainingMatch = new Match(text, false);
+            IMatch match = new Match(text, false);
 
             foreach (var pattern in patterns)
             {
-                remainingMatch = pattern.Match(remainingMatch.RemainingText());
+                match = pattern.Match(match.RemainingText());
 
-                if (!remainingMatch.Succes())
+                if (!match.Succes())
                 {
                     return new Match(text, false);
                 }
             }
 
-            return remainingMatch;
+            return match;
         }
     }
 }
