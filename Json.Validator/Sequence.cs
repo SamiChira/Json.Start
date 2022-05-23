@@ -13,24 +13,25 @@ namespace Json
 
         public IMatch Match(string text)
         {
+            var remainingMatch = new Match(text, false);
+            var initialMatch = new Match(text, false);
+
             if (string.IsNullOrEmpty(text))
             {
-                return new Match(text, false);
+                return initialMatch;
             }
 
-            var remainingText = text;
-
-            foreach (var pattern in patterns)
+            foreach (var item in patterns)
             {
-                if (!pattern.Match(remainingText).Succes())
-                {
-                    return new Match(text, false);
-                }
+                remainingMatch = (Match)item.Match(remainingMatch.RemainingText());
 
-                remainingText = pattern.Match(remainingText).RemainingText();
+                if (!remainingMatch.Succes())
+                {
+                    return initialMatch;
+                }
             }
 
-            return new Match(remainingText, true);
+            return remainingMatch;
         }
     }
 }
