@@ -40,7 +40,7 @@ namespace Json.Facts
             Assert.Equal("a", anyLetters.Match("a").RemainingText());
 
             Assert.False(anyCharacters.Match("2").Succes());
-            Assert.Equal("a", anyCharacters.Match("2").RemainingText());
+            Assert.Equal("2", anyCharacters.Match("2").RemainingText());
         }
     }
 }
