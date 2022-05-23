@@ -13,7 +13,9 @@ namespace Json
 
         public IMatch Match(string text)
         {
-            return !string.IsNullOrEmpty(text) && accepted.Contains(text[0]) ? new Match(text[1..], true) : new Match(text, false);
+            return !string.IsNullOrEmpty(text) && accepted.Contains(text[0])
+                ? new Match(text[1..], true)
+                : new Match(text, false);
         }
     }
 }
