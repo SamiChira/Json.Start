@@ -14,17 +14,13 @@ namespace Json
         public IMatch Match(string text)
         {
             IMatch match = new Match(text, true);
-            if (string.IsNullOrEmpty(text))
-            {
-                return match;
-            }
 
-            while (pattern.Match(match.RemainingText()).Succes())
+            while (match.Succes())
             {
                 match = pattern.Match(match.RemainingText());
             }
 
-            return match;
+            return new Match(match.RemainingText(), true);
         }
     }
 }
