@@ -8,7 +8,8 @@ namespace Json
 
         public OneOrMore(IPattern pattern)
         {
-            this.pattern = new Sequence(pattern, new Many(pattern));
+            this.pattern = new Sequence(
+                            pattern, new Many(pattern));
         }
 
         public IMatch Match(string text)
