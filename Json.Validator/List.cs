@@ -8,9 +8,10 @@ namespace Json
 
         public List(IPattern element, IPattern separator)
         {
-            this.pattern = new Sequence(
+            this.pattern = new Optional(
+                    new Sequence(
                     element,
-                    new Many(new Sequence(separator, element)));
+                    new Many(new Sequence(separator, element))));
         }
 
         public IMatch Match(string text)
