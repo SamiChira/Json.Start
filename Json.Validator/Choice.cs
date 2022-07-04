@@ -15,7 +15,7 @@
             {
                 if (pattern.Match(text).Succes())
                 {
-                    return new Match(text[1..], true);
+                    return new Match(pattern.Match(text).RemainingText(), true);
                 }
             }
 
