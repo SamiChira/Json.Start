@@ -19,7 +19,7 @@
                         hex,
                         hex,
                         hex));
-            var controlCharacters = new Choice(
+            var escapeCharacters = new Choice(
                 new Any("btrnf/\"\\"),
                 hexSeq);
             var character = new Choice(
@@ -28,10 +28,10 @@
                 new Range(']', '\uFFFF'),
                 new Sequence(
                 backslash,
-                controlCharacters));
-            var characters = new OneOrMore(character);
+                escapeCharacters));
+            var characters = new Many(character);
 
-            this.pattern = new Sequence(quotes, new Optional(characters), quotes);
+            this.pattern = new Sequence(quotes, characters, quotes);
         }
 
         public IMatch Match(string text)
