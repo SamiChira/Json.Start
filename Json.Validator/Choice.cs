@@ -1,12 +1,20 @@
-﻿namespace Json
+﻿using System;
+
+namespace Json
 {
     public class Choice : IPattern
     {
-        readonly IPattern[] patterns;
+        private IPattern[] patterns;
 
         public Choice(params IPattern[] patterns)
         {
             this.patterns = patterns;
+        }
+
+        public void Add(IPattern value)
+        {
+            Array.Resize(ref patterns, patterns.Length + 1);
+            patterns[patterns.Length - 1] = value;
         }
 
         public IMatch Match(string text)
