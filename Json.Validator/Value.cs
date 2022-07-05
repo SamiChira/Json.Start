@@ -20,10 +20,10 @@ namespace Json
             var elements = new List(element, new Character(','));
 
             var array = new Choice(
-                        new Sequence(new Character('['), whiteSpace, new Character(',')),
+                        new Sequence(new Character('['), whiteSpace, new Character(']')),
                         new Sequence(new Character('['), elements, new Character(']')));
 
-            var member = new Sequence(whiteSpace, new String(), whiteSpace);
+            var member = new Sequence(whiteSpace, new String(), whiteSpace, new Character(':'), element);
             var members = new List(member, new Character(','));
 
             var obj = new Choice(
