@@ -60,12 +60,5 @@ namespace Json.Facts
             Assert.True(value.Match("{ \"abc\" : \"abc\" }").Succes());
             Assert.True(value.Match("{ \"abc\" : true }").Succes());
         }
-
-        /*[Fact]
-        public void MatchIsCalledAndTextEnteredIs()
-        {
-            var value = new Value();
-
-        }*/
     }
 }
