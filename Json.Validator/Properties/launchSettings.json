@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Json": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\test.txt"
+    }
+  }
+}
