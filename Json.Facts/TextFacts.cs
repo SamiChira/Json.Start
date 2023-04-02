@@ -7,7 +7,7 @@ namespace Json.Facts
         [Fact]
         public void WhenMatchIsCalledAndTextEnteredIsNullOrEmptyReturnsFalse()
         {
-            var text = new Text("test");
+            var text = new Txt("test");
 
             Assert.False(text.Match("").Succes());
             Assert.False(text.Match(null).Succes());
@@ -16,8 +16,8 @@ namespace Json.Facts
         [Fact]
         public void WhenMatchIsCalledAndTextEnteredMatchesTheGivenPrefixReturnsTrueAndRemainingText()
         {
-            var @true = new Text("true");
-            var @false = new Text("false");
+            var @true = new Txt("true");
+            var @false = new Txt("false");
 
             Assert.True(@true.Match("true").Succes() && @true.Match("true").RemainingText() == "");
             Assert.True(@true.Match("trueX").Succes() && @true.Match("trueX").RemainingText() == "X");
@@ -27,8 +27,8 @@ namespace Json.Facts
         [Fact]
         public void WhenMatchIsCalledAndTextEnteredDoesNotMatchTheGivenPrefixReturnsFalseAndTextEntered()
         {
-            var @true = new Text("true");
-            var @false = new Text("false");
+            var @true = new Txt("true");
+            var @false = new Txt("false");
 
             Assert.False(@true.Match("false").Succes() && @true.Match("false").RemainingText() == "false");
             Assert.False(@false.Match("true").Succes() && @false.Match("true").RemainingText() == "true");
@@ -36,7 +36,7 @@ namespace Json.Facts
         [Fact]
         public void WhenMatchIsCalledAndPrefixIsAnEmptyStringReturnsMatchAndRemainingText()
         {
-            var empty = new Text("");
+            var empty = new Txt("");
 
             Assert.True(empty.Match("true").Succes() && empty.Match("true").RemainingText() == "true");
             Assert.False(empty.Match(null).Succes() && empty.Match(null).RemainingText() == "");

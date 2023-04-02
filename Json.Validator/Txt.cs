@@ -2,11 +2,11 @@
 
 namespace Json
 {
-    public class Text : IPattern
+    public class Txt : IPattern
     {
         readonly string prefix;
 
-        public Text(string prefix)
+        public Txt(string prefix)
         {
             this.prefix = prefix;
         }

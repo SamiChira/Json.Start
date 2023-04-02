@@ -9,9 +9,9 @@
             var value = new Choice(
                          new String(),
                          new Number(),
-                         new Text("true"),
-                         new Text("false"),
-                         new Text("null"));
+                         new Txt("true"),
+                         new Txt("false"),
+                         new Txt("null"));
 
             var whiteSpace = new Many(new Any(" \n\r\t"));
 
